@@ -70,6 +70,35 @@ namespace VictimsHelp.DAL.Assistance
             };
 
             modelBuilder.Entity<UserRole>().HasData(userRoles);
+
+            var article1 = new Article
+            {
+                Id = Guid.NewGuid(),
+                Title = "Addressing Domestic Violence Against Women: An Unfinished Agenda",
+                Text = "Domestic violence is a global issue reaching across national" +
+                " boundaries as well as socio-economic, cultural, racial and class" +
+                " distinctions. This problem is not only widely dispersed geographically," +
+                " but its incidence is also extensive, making it a typical and accepted" +
+                " behavior. Domestic violence is wide spread, deeply ingrained and has" +
+                " serious impacts on women's health and well-being. Its continued existence" +
+                " is morally indefensible. Its cost to individuals, to health systems and" +
+                " to society is enormous. Yet no other major problem of public health has" +
+                " been so widely ignored and so little understood."
+            };
+            
+            var article2 = new Article
+            {
+                Id = Guid.NewGuid(),
+                Title = "What is Domestic Violence?",
+                Text = "Domestic violence can be described as the power misused by one adult" +
+                " in a relationship to control another. It is the establishment of control" +
+                " and fear in a relationship through violence and other forms of abuse." +
+                " This violence can take the form of physical assault, psychological abuse," +
+                " social abuse, financial abuse, or sexual assault. The frequency of the" +
+                " violence can be on and off, occasional or chronic."
+            };
+
+            modelBuilder.Entity<Article>().HasData(article1, article2);
         }
     }
 }

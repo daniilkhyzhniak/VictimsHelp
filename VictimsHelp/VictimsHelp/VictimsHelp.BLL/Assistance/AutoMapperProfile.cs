@@ -16,6 +16,9 @@ namespace VictimsHelp.BLL.Assistance
             CreateMap<UserModel, User>()
                 .ForMember(u => u.Password, opt => opt.MapFrom(u => BCrypt.Net.BCrypt.HashPassword(u.Password)))
                 .ForMember(u => u.UserRoles, opt => opt.Ignore());
+
+            CreateMap<Article, ArticleModel>()
+                .ReverseMap();
         }
     }
 }
