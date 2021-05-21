@@ -4,14 +4,90 @@
     "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\VictimsHelp.PL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\VictimsHelp.PL.csproj": {
+    "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.BLL\\VictimsHelp.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\VictimsHelp.PL.csproj",
-        "projectName": "VictimsHelp.PL",
-        "projectPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\VictimsHelp.PL.csproj",
+        "projectUniqueName": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.BLL\\VictimsHelp.BLL.csproj",
+        "projectName": "VictimsHelp.BLL",
+        "projectPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.BLL\\VictimsHelp.BLL.csproj",
         "packagesPath": "C:\\Users\\dania\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\obj\\",
+        "outputPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\dania\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.DAL\\VictimsHelp.DAL.csproj": {
+                "projectPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.DAL\\VictimsHelp.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.DAL\\VictimsHelp.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.DAL\\VictimsHelp.DAL.csproj",
+        "projectName": "VictimsHelp.DAL",
+        "projectPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.DAL\\VictimsHelp.DAL.csproj",
+        "packagesPath": "C:\\Users\\dania\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -43,6 +119,122 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\VictimsHelp.PL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\VictimsHelp.PL.csproj",
+        "projectName": "VictimsHelp.PL",
+        "projectPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\VictimsHelp.PL.csproj",
+        "packagesPath": "C:\\Users\\dania\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\dania\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.BLL\\VictimsHelp.BLL.csproj": {
+                "projectPath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.BLL\\VictimsHelp.BLL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.15, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
