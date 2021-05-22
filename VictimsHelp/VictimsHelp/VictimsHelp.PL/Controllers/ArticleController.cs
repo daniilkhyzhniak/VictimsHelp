@@ -7,6 +7,7 @@ using VictimsHelp.BLL.Models;
 namespace VictimsHelp.PL.Controllers
 {
     [Route("articles")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ArticleController : Controller
     {
         private readonly IArticleService _articleService;

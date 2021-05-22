@@ -4,6 +4,7 @@ using VictimsHelp.BLL.Contracts;
 
 namespace VictimsHelp.PL.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AccountController : Controller
     {
         private readonly IUserService _userService;

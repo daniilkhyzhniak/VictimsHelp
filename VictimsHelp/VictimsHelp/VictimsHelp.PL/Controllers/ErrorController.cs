@@ -3,6 +3,7 @@
 namespace VictimsHelp.PL.Controllers
 {
     [Route("error")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ErrorController : Controller
     {
         [HttpGet("forbidden")]

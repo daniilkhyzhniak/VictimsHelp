@@ -5,6 +5,7 @@ using VictimsHelp.BLL.Contracts;
 namespace VictimsHelp.PL.Controllers
 {
     [Route("users")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class UserController : Controller
     {
         private readonly IUserService _userService;

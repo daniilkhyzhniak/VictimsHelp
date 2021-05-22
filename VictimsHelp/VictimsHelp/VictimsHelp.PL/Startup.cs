@@ -62,6 +62,8 @@ namespace VictimsHelp.PL
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .AddXmlDataContractSerializerFormatters();
+
+            services.AddSwaggerGen();
         }
 
         private ApiAuthSetting GetApiAuthSettings(IServiceCollection services)
@@ -83,6 +85,15 @@ namespace VictimsHelp.PL
             {
                 app.UseExceptionHandler("/errors");
             }
+
+            app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Victims Help API v1");
+            });
 
             app.UseResponseCaching();
             app.UseStaticFiles();
