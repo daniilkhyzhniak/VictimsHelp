@@ -17,7 +17,7 @@ namespace VictimsHelp.PL.Controllers
             _articleService = articleService;
         }
 
-        [HttpGet]
+        [HttpGet("~/")]
         public async Task<IActionResult> List()
         {
             var articles = await _articleService.GetAllAsync();

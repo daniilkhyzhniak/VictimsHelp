@@ -15,7 +15,7 @@ namespace VictimsHelp.PL.Controllers
             _userService = userService;
         }
 
-        [HttpGet("~/")]
+        [HttpGet]
         public async Task<IActionResult> List()
         {
             var users = await _userService.GetAllAsync();

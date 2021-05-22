@@ -7,7 +7,7 @@ namespace VictimsHelp.PL.Controllers.Api
 {
     [ApiController]
     [Route("api/articles")]
-    public class ArticleApiController : Controller
+    public class ArticleApiController : ControllerBase
     {
         private readonly IArticleService _articleService;
 

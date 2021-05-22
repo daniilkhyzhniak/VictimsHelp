@@ -16,7 +16,7 @@ namespace VictimsHelp.PL.Controllers.Api
     [ApiController]
     [Route("api/account")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class AccountApiController : Controller
+    public class AccountApiController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly ITokenFactory _tokenFactory;
@@ -90,18 +90,35 @@ namespace VictimsHelp.PL.Controllers.Api
         [HttpGet("profile")]
         public async Task<IActionResult> Profile()
         {
-            var emailClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimType.Email);
+            var email = User.Identity.Name;
 
-            if (emailClaim is null)
+            if (string.IsNullOrWhiteSpace(email))
             {
                 return BadRequest();
             }
 
-            var user = await _userService.GetByEmailAsync(emailClaim.Value);
+            var user = await _userService.GetByEmailAsync(email);
 
-            var profile = _mapper.Map<ProfileViewModel>(user);
+            var profile = _mapper.Map<ProfileEditorViewModel>(user);
 
             return Ok(profile);
+        }
+
+        [HttpPut("profile/update")]
+        public async Task<IActionResult> Edit(ProfileEditorViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _mapper.Map<UserModel>(model);
+                var email = User.Identity.Name;
+                user.Email = email;
+
+                await _userService.EditAsync(user);
+
+                return RedirectToAction("Profile", new { email });
+            }
+
+            return BadRequest("Model state is not valid.");
         }
     }
 }

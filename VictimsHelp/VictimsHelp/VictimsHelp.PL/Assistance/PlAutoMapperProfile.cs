@@ -12,7 +12,11 @@ namespace VictimsHelp.PL.Assistance
 
             CreateMap<LoginViewModel, UserModel>();
 
-            CreateMap<UserModel, ProfileViewModel>();
+            CreateMap<UserModel, ProfileViewModel>()
+                .ReverseMap();
+
+            CreateMap<UserModel, ProfileEditorViewModel>()
+                .ReverseMap();
         }
     }
 }
