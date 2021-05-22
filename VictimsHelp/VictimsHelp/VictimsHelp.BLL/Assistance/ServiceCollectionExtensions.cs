@@ -12,7 +12,7 @@ namespace VictimsHelp.BLL.Assistance
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IArticleService, ArticleService>();
             services.AddDal(connectionString);
-            services.AddAutoMapper(cfg => cfg.AddProfile<AutoMapperProfile>());
+            services.AddAutoMapper(cfg => cfg.AddProfile<BllAutoMapperProfile>());
         }
     }
 }

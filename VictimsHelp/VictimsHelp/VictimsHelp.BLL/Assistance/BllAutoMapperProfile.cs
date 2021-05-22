@@ -5,9 +5,9 @@ using VictimsHelp.DAL.Entities;
 
 namespace VictimsHelp.BLL.Assistance
 {
-    public class AutoMapperProfile : Profile
+    public class BllAutoMapperProfile : Profile
     {
-        public AutoMapperProfile()
+        public BllAutoMapperProfile()
         {
             CreateMap<User, UserModel>()
                 .ForMember(u => u.Password, opt => opt.Ignore())

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using VictimsHelp.BLL.Assistance;
+using VictimsHelp.PL.Assistance;
 using VictimsHelp.PL.Authorization;
 
 namespace VictimsHelp.PL
@@ -26,6 +27,8 @@ namespace VictimsHelp.PL
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddBll(_config.GetConnectionString("VictimsHelpDBConnection"));
+            services.AddSingleton<ITokenFactory, JwtTokenFactory>();
+            services.AddAutoMapper(cfg => cfg.AddProfile<PlAutoMapperProfile>());
 
             services.AddMvc();
 
