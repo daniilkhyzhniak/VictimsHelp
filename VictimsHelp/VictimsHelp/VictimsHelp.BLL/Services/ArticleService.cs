@@ -47,24 +47,81 @@ namespace VictimsHelp.BLL.Services
             }
         }
 
-        public Task DeleteByIdAsync(Guid id)
+        public async Task DeleteByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var article = await _articles.FirstOrDefaultAsync(u => u.Id == id);
+
+                if (article != null)
+                {
+                    return;
+                }
+
+                _articles.Remove(article);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
 
-        public Task<bool> EditAsync(ArticleModel model)
+        public async Task<bool> EditAsync(ArticleModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var article = await _articles.FirstOrDefaultAsync(u => u.Id == model.Id);
+
+                if (article != null)
+                {
+                    return false;
+                }
+
+                article.Title = model.Title;
+                article.Text = model.Text;
+
+                _articles.Update(article);
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public Task<IEnumerable<ArticleModel>> GetAllAsync()
+        public async Task<IEnumerable<ArticleModel>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var articles = await _articles.ToListAsync();
+
+                var models = _mapper.Map<IEnumerable<ArticleModel>>(articles);
+
+                return models;
+            }
+            catch (Exception)
+            {
+                return new List<ArticleModel>();
+            }
         }
 
-        public Task<ArticleModel> GetByIdAsync(Guid id)
+        public async Task<ArticleModel> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var article = await _articles.FirstOrDefaultAsync(a => a.Id == id);
+
+                var model = _mapper.Map<ArticleModel>(article);
+
+                return model;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

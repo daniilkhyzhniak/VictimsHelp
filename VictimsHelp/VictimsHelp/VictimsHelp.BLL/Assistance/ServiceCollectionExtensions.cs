@@ -10,6 +10,7 @@ namespace VictimsHelp.BLL.Assistance
         public static void AddBll(this IServiceCollection services, string connectionString)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IArticleService, ArticleService>();
             services.AddDal(connectionString);
             services.AddAutoMapper(cfg => cfg.AddProfile<AutoMapperProfile>());
         }

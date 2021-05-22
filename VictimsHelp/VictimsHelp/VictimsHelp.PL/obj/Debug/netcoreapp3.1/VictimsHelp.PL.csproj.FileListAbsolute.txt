@@ -158,3 +158,8 @@ C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\
 C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\bin\Debug\netcoreapp3.1\Humanizer.dll
 C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\User\Details.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Article\Create.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Article\Delete.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Article\Details.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Article\Edit.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Article\List.cshtml.g.cs

@@ -19,8 +19,4 @@
     <ProjectReference Include="..\VictimsHelp.BLL\VictimsHelp.BLL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Api\" />
-  </ItemGroup>
-
 </Project>
