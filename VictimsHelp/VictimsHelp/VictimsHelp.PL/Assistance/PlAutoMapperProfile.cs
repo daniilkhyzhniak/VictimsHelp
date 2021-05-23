@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using VictimsHelp.BLL.Models;
 using VictimsHelp.PL.ViewModels.Account;
+using VictimsHelp.PL.ViewModels.User;
 
 namespace VictimsHelp.PL.Assistance
 {
@@ -15,7 +16,10 @@ namespace VictimsHelp.PL.Assistance
             CreateMap<UserModel, ProfileViewModel>()
                 .ReverseMap();
 
-            CreateMap<UserModel, ProfileEditorViewModel>()
+            CreateMap<UserModel, UserViewModel>()
+                .ReverseMap();
+
+            CreateMap<UserModel, UserEditorViewModel>()
                 .ReverseMap();
         }
     }

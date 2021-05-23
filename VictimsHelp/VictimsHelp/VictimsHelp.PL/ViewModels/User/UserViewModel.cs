@@ -1,9 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace VictimsHelp.PL.ViewModels.Account
+namespace VictimsHelp.PL.ViewModels.User
 {
-    public class ProfileEditorViewModel
+    public class UserViewModel
     {
+        [Required(ErrorMessage = "Email field is required")]
+        [EmailAddress(ErrorMessage = "Invalid format for email field")]
+        [Display(Name = "Email")]
+        [Remote("VerifyEmail", "Account", ErrorMessage = "Email is already in use")]
+        public string Email { get; set; }
+
         [Required(ErrorMessage = "First name field is required")]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
@@ -21,5 +29,10 @@ namespace VictimsHelp.PL.ViewModels.Account
 
         [Display(Name = "Gender")]
         public string Gender { get; set; }
+
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        public ICollection<string> Roles { get; set; }
     }
 }

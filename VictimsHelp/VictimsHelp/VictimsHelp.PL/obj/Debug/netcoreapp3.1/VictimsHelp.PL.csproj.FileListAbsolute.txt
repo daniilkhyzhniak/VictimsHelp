@@ -174,3 +174,6 @@ C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\
 C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Account\Edit.cshtml.g.cs
 C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Account\Profile.cshtml.g.cs
 C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\User\Delete.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\User\Edit.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\User\Create.cshtml.g.cs

@@ -26,6 +26,16 @@ namespace VictimsHelp.PL
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.WithOrigins("http://localhost:60778/")
+                       .AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .SetIsOriginAllowed((x) => true)
+                       .AllowCredentials();
+            }));
+
+
             services.AddBll(_config.GetConnectionString("VictimsHelpDBConnection"));
             services.AddSingleton<ITokenFactory, JwtTokenFactory>();
             services.AddAutoMapper(cfg => cfg.AddProfile<PlAutoMapperProfile>());
@@ -85,15 +95,15 @@ namespace VictimsHelp.PL
             {
                 app.UseExceptionHandler("/errors");
             }
-
-            app.UseHttpsRedirection();
-
             app.UseSwagger();
+            app.UseCors("MyPolicy");
 
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Victims Help API v1");
             });
+
+            app.UseHttpsRedirection();
 
             app.UseResponseCaching();
             app.UseStaticFiles();
