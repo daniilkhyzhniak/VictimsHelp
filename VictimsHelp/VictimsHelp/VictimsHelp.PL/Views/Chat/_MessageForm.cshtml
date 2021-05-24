@@ -1,0 +1,9 @@
+﻿@model VictimsHelp.BLL.Models.MessageModel
+
+<form asp-action="SendMessage" method="post">
+    <h2>Message</h2>
+    <div class="form-group">
+        <textarea class="form-control" rows="3" name="Text" asp-for="Text"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>

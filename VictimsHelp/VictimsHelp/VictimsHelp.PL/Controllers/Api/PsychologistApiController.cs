@@ -11,12 +11,12 @@ namespace VictimsHelp.PL.Controllers.Api
     [Authorize]
     [Route("api/psychologists")]
     [ApiController]
-    public class PsychologistController : ControllerBase
+    public class PsychologistApiController : ControllerBase
     {
         private readonly IPsychologistService _psychologistService;
         private readonly IMapper _mapper;
 
-        public PsychologistController(
+        public PsychologistApiController(
             IPsychologistService psychologistService,
             IMapper mapper)
         {
