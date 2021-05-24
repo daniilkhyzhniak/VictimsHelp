@@ -15,6 +15,10 @@ namespace VictimsHelp.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>()
+                .HasMany(u => u.Messages)
+                .WithOne(m => m.Sender);
+
+            modelBuilder.Entity<User>()
                 .HasIndex(g => g.Email)
                 .IsUnique();
 
@@ -27,6 +31,7 @@ namespace VictimsHelp.DAL
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Article> Articles { get; set; }
     }

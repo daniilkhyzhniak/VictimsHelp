@@ -33,6 +33,9 @@ namespace VictimsHelp.PL.ViewModels.User
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Display(Name = "Psychologist email")]
+        public string PsychologistEmail { get; set; }
+
         public ICollection<string> Roles { get; set; }
     }
 }

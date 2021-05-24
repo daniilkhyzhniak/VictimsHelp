@@ -10,6 +10,7 @@ using System.Text;
 using VictimsHelp.BLL.Assistance;
 using VictimsHelp.PL.Assistance;
 using VictimsHelp.PL.Authorization;
+using VictimsHelp.PL.Hubs;
 
 namespace VictimsHelp.PL
 {
@@ -35,12 +36,12 @@ namespace VictimsHelp.PL
                        .AllowCredentials();
             }));
 
-
             services.AddBll(_config.GetConnectionString("VictimsHelpDBConnection"));
             services.AddSingleton<ITokenFactory, JwtTokenFactory>();
             services.AddAutoMapper(cfg => cfg.AddProfile<PlAutoMapperProfile>());
 
             services.AddMvc();
+            services.AddSignalR();
 
             var apiAuthSettings = GetApiAuthSettings(services);
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -115,6 +116,7 @@ namespace VictimsHelp.PL
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "");
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
