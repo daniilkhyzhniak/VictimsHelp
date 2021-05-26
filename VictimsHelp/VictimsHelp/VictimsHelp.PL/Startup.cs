@@ -1,3 +1,6 @@
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Util.Store;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,8 +9,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System.IO;
 using System.Text;
+using System.Threading;
 using VictimsHelp.BLL.Assistance;
+using VictimsHelp.BLL.Contracts;
+using VictimsHelp.BLL.Models;
+using VictimsHelp.BLL.Services;
 using VictimsHelp.PL.Assistance;
 using VictimsHelp.PL.Authorization;
 using VictimsHelp.PL.Hubs;
@@ -40,6 +48,13 @@ namespace VictimsHelp.PL
             services.AddSingleton<ITokenFactory, JwtTokenFactory>();
             services.AddAutoMapper(cfg => cfg.AddProfile<PlAutoMapperProfile>());
 
+            UserCredential credential = GetUserCredential();
+            services.AddSingleton<IGoogleCalendarApiContext>(new GoogleCalendarApiContext
+            {
+                ApplicationName = "VictimsHelp",
+                HttpClientInitializer = credential
+            });
+
             services.AddMvc();
             services.AddSignalR();
 
@@ -48,7 +63,7 @@ namespace VictimsHelp.PL
                 .AddCookie(options =>
                 {
                     options.LoginPath = new PathString("/login");
-                    options.AccessDeniedPath = new PathString("/accessDenied");
+                    options.AccessDeniedPath = new PathString("/error/accessDenied");
                     options.ReturnUrlParameter = "returnUrl";
                 })
                 .AddJwtBearer(options =>
@@ -83,6 +98,26 @@ namespace VictimsHelp.PL
             services.Configure<ApiAuthSetting>(authSettingsSection);
 
             return authSettingsSection.Get<ApiAuthSetting>();
+        }
+
+        private UserCredential GetUserCredential()
+        {
+            string[] Scopes = {
+                CalendarService.Scope.Calendar,
+                CalendarService.Scope.CalendarEvents,
+                CalendarService.Scope.CalendarEventsReadonly
+            };
+
+            using var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read);
+            // The file token.json stores the user's access and refresh tokens, and is created
+            // automatically when the authorization flow completes for the first time.
+            string credPath = "token.json";
+            return GoogleWebAuthorizationBroker.AuthorizeAsync(
+                GoogleClientSecrets.Load(stream).Secrets,
+                Scopes,
+                "user",
+                CancellationToken.None,
+                new FileDataStore(credPath, true)).Result;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

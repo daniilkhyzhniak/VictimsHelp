@@ -7,6 +7,17 @@ namespace VictimsHelp.PL.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ErrorController : Controller
     {
+        [HttpGet("accessDenied")]
+        public IActionResult AccessDenied()
+        {
+            var error = new ErrorViewModel
+            {
+                Title = "Access denied",
+                Message = "Access to this resource is denied."
+            };
+            return View("Error", error);
+        }
+
         [HttpGet("forbidden")]
         public IActionResult Forbidden()
         {

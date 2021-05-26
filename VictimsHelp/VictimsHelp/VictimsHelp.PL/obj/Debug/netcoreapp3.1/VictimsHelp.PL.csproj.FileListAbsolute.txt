@@ -179,4 +179,14 @@ C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\
 C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\User\Create.cshtml.g.cs
 C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\bin\Debug\netcoreapp3.1\libman.json
 C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Chat\Chat.cshtml.g.cs
-C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Chat\_MessageForm.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\bin\Debug\netcoreapp3.1\Google.Apis.dll
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\bin\Debug\netcoreapp3.1\Google.Apis.Auth.PlatformServices.dll
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\bin\Debug\netcoreapp3.1\Google.Apis.Auth.dll
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\bin\Debug\netcoreapp3.1\Google.Apis.Calendar.v3.dll
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\bin\Debug\netcoreapp3.1\Google.Apis.Core.dll
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\bin\Debug\netcoreapp3.1\credentials.json
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Calendar\Events.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Psychologist\Clients.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Chat\_MessageFormPartial.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Psychologist\Client.cshtml.g.cs
+C:\Users\dania\source\repos\daniilkhyzhniak\VictimsHelp\VictimsHelp\VictimsHelp\VictimsHelp.PL\obj\Debug\netcoreapp3.1\Razor\Views\Calendar\_OrganizeEventFormPartial.cshtml.g.cs

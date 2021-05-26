@@ -9,5 +9,6 @@ namespace VictimsHelp.BLL.Contracts
         Task<IEnumerable<UserModel>> GetAllAsync();
         Task<UserModel> GetByEmailAsync(string email);
         Task<bool> SignDeclarationAsync(string psychologistEmail, string clientEmail);
+        Task<IEnumerable<UserModel>> GetClientsAsync(string psychologistEmail);
     }
 }

@@ -98,5 +98,23 @@ namespace VictimsHelp.BLL.Services
                 return false;
             }
         }
+
+        public async Task<IEnumerable<UserModel>> GetClientsAsync(string psychologistEmail)
+        {
+            try
+            {
+                var users = await _users
+                    .Where(u => u.PsychologistEmail == psychologistEmail)
+                    .ToListAsync();
+
+                var models = _mapper.Map<IEnumerable<UserModel>>(users);
+
+                return models;
+            }
+            catch (Exception)
+            {
+                return new List<UserModel>();
+            }
+        }
     }
 }

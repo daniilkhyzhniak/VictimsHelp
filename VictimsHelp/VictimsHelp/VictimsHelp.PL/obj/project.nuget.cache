@@ -1,12 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "jqehHgtG32WJxYVKGZxsk+ETkP6XGndNknKqvkxymoa0WpVowMwf49ieAcP6ZV/YTs9tL1YPBr4odOCyK+QbJw==",
+  "dgSpecHash": "JkFiPBG26n2qTvTL/GKu1V5NBvpfnxQEsGD2qhVZN09eDdtYgnriYWWzjeyPgO/5QnncNNUP1vMCPbGgBDBsEg==",
   "success": true,
   "projectFilePath": "C:\\Users\\dania\\source\\repos\\daniilkhyzhniak\\VictimsHelp\\VictimsHelp\\VictimsHelp\\VictimsHelp.PL\\VictimsHelp.PL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dania\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\dania\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\dania\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
+    "C:\\Users\\dania\\.nuget\\packages\\google.apis\\1.51.0\\google.apis.1.51.0.nupkg.sha512",
+    "C:\\Users\\dania\\.nuget\\packages\\google.apis.auth\\1.51.0\\google.apis.auth.1.51.0.nupkg.sha512",
+    "C:\\Users\\dania\\.nuget\\packages\\google.apis.calendar.v3\\1.51.0.2312\\google.apis.calendar.v3.1.51.0.2312.nupkg.sha512",
+    "C:\\Users\\dania\\.nuget\\packages\\google.apis.core\\1.51.0\\google.apis.core.1.51.0.nupkg.sha512",
     "C:\\Users\\dania\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\dania\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.15\\microsoft.aspnetcore.authentication.jwtbearer.3.1.15.nupkg.sha512",
     "C:\\Users\\dania\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

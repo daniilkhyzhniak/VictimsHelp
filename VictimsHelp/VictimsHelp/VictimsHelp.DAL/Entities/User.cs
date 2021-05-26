@@ -14,8 +14,8 @@ namespace VictimsHelp.DAL.Entities
         public string PsychologistEmail { get; set; }
 
         public User Psychologist { get; set; }
-        public ICollection<User> Clients { get; set; }
-        public ICollection<UserRole> UserRoles { get; set; }
-        public ICollection<Message> Messages { get; set; }
+        public ICollection<User> Clients { get; set; } = new List<User>();
+        public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+        public ICollection<Message> Messages { get; set; } = new List<Message>();
     }
 }

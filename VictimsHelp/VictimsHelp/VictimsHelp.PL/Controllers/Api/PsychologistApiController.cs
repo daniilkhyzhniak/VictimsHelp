@@ -1,14 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VictimsHelp.BLL.Contracts;
+using VictimsHelp.BLL.Enums;
 using VictimsHelp.PL.ViewModels.Psychologist;
 
 namespace VictimsHelp.PL.Controllers.Api
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = Roles.Client)]
     [Route("api/psychologists")]
     [ApiController]
     public class PsychologistApiController : ControllerBase
@@ -49,9 +51,10 @@ namespace VictimsHelp.PL.Controllers.Api
             return Ok(model);
         }
 
-        [HttpPost("declaration/{psychologistEmail}/{clientEmail}")]
-        public async Task<IActionResult> SignDeclaration(string psychologistEmail, string clientEmail)
+        [HttpPost("declaration/{psychologistEmail}")]
+        public async Task<IActionResult> SignDeclaration(string psychologistEmail)
         {
+            var clientEmail = HttpContext.User.Identity.Name;
             var result = await _psychologistService.SignDeclarationAsync(psychologistEmail, clientEmail);
 
             if (result)

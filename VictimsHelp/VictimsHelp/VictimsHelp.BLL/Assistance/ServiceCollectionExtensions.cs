@@ -13,6 +13,7 @@ namespace VictimsHelp.BLL.Assistance
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<IPsychologistService, PsychologistService>();
             services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IGoogleCalendarApiService, GoogleCalendarApiService>();
             services.AddDal(connectionString);
             services.AddAutoMapper(cfg => cfg.AddProfile<BllAutoMapperProfile>());
         }

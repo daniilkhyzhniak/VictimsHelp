@@ -59,6 +59,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.2, )"
+            },
+            "Google.Apis.Calendar.v3": {
+              "target": "Package",
+              "version": "[1.51.0.2312, )"
             }
           },
           "imports": [

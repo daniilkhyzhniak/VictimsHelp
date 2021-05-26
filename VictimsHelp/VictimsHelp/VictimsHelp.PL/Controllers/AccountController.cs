@@ -70,7 +70,7 @@ namespace VictimsHelp.PL.Controllers
                 ModelState.AddModelError("", "An error occurred.");
             }
 
-            return BadRequest("Invalid data.");
+            return View(model);
         }
 
         [HttpGet("~/login")]
