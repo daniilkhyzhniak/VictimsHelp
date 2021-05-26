@@ -4,9 +4,12 @@ import 'Info.dart';
 import 'Chat.dart';
 import 'Calendar.dart';
 import 'Account.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:provider/provider.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(new MyApp());
+
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -14,6 +17,7 @@ class MyApp extends StatefulWidget {
   }
 }
 class MyAppState extends State<MyApp> {
+  /*
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   new FlutterLocalNotificationsPlugin();
   var initializationSettingAndroid;
@@ -31,6 +35,7 @@ class MyAppState extends State<MyApp> {
       int id, String title, String body, String payload) async{
 
   }
+  */
 
   int _selectedTab = 0;
   final _pageOptions = [
