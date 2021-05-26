@@ -26,6 +26,18 @@ namespace VictimsHelp.DAL.Assistance
                 Gender = "M",
                 Age = 25
             };
+            
+            var psychologist = new User
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Psychologist",
+                LastName = "Psychologist",
+                Email = "user2@gmail.com",
+                Password = BCrypt.Net.BCrypt.HashPassword("user2@gmail.com"),
+                PhoneNumber = "0501234567",
+                Gender = "M",
+                Age = 25
+            };
 
             var client = new User
             {
@@ -36,10 +48,11 @@ namespace VictimsHelp.DAL.Assistance
                 Password = BCrypt.Net.BCrypt.HashPassword("user1@gmail.com"),
                 PhoneNumber = "0998887766",
                 Gender = "W",
-                Age = 20
+                Age = 20,
+                PsychologistEmail = psychologist.Email
             };
 
-            modelBuilder.Entity<User>().HasData(admin, client);
+            modelBuilder.Entity<User>().HasData(admin, client, psychologist);
 
             var userRoles = new List<UserRole>
             {
@@ -66,6 +79,12 @@ namespace VictimsHelp.DAL.Assistance
                     Id = Guid.NewGuid(),
                     UserId = admin.Id,
                     RoleId = clientRole.Id
+                },
+                 new UserRole
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = psychologist.Id,
+                    RoleId = psychologistRole.Id
                 },
             };
 

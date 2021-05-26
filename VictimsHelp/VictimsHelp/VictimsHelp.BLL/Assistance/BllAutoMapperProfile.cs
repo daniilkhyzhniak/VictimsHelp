@@ -19,6 +19,9 @@ namespace VictimsHelp.BLL.Assistance
 
             CreateMap<Article, ArticleModel>()
                 .ReverseMap();
+
+            CreateMap<Message, MessageModel>()
+                .ReverseMap();
         }
     }
 }

@@ -11,6 +11,8 @@ namespace VictimsHelp.BLL.Assistance
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<IPsychologistService, PsychologistService>();
+            services.AddScoped<IMessageService, MessageService>();
             services.AddDal(connectionString);
             services.AddAutoMapper(cfg => cfg.AddProfile<BllAutoMapperProfile>());
         }

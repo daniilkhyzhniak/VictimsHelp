@@ -126,23 +126,21 @@ namespace VictimsHelp.PL.Controllers
                 return RedirectToAction("NotFound", "Error");
             }
 
-            var profile = _mapper.Map<ProfileEditorViewModel>(user);
+            var profile = _mapper.Map<ProfileViewModel>(user);
 
             return View(profile);
         }
 
         [HttpPost("~/profile/update")]
-        public async Task<IActionResult> Edit(ProfileEditorViewModel model)
+        public async Task<IActionResult> Edit(ProfileViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = _mapper.Map<UserModel>(model);
-                var email = User.Identity.Name;
-                user.Email = email;
 
                 await _userService.EditAsync(user);
 
-                return RedirectToAction("Profile", new { email });
+                return RedirectToAction("Profile", new { email = model.Email });
             }
 
             return View(model);

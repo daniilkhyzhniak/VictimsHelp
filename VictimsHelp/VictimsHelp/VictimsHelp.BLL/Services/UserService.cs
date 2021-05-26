@@ -195,7 +195,7 @@ namespace VictimsHelp.BLL.Services
 
                 return models;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new List<UserModel>();
             }
