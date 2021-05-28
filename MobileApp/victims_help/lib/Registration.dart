@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:html';
 import 'dart:io';
 
+import 'package:victims_help/Login.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:select_form_field/select_form_field.dart';
@@ -9,12 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'InputDeco_design.dart';
 import 'package:http/http.dart' as http;
 
-class FormPage extends StatefulWidget {
+class Registration extends StatefulWidget {
   @override
-  _FormPageState createState() => _FormPageState();
+  RegistrationState createState() => RegistrationState();
 }
 
-class _FormPageState extends State<FormPage> {
+class RegistrationState extends State<Registration> {
     //String firstName, lastName, phoneNumber, gender, email;
     //int age;
 
@@ -49,7 +50,7 @@ class _FormPageState extends State<FormPage> {
                   child: TextFormField(
                     controller: firstName,
                     keyboardType: TextInputType.text,
-                    decoration: buildInputDecoration(Icons.person,"First Name"),
+                    decoration: buildInputDecoration(Icons.person,"First name"),
                     validator: (String value){
                       if(value.isEmpty)
                       {
@@ -67,7 +68,7 @@ class _FormPageState extends State<FormPage> {
                   child: TextFormField(
                     controller: lastName,
                     keyboardType: TextInputType.text,
-                    decoration: buildInputDecoration(Icons.person,"Last Name"),
+                    decoration: buildInputDecoration(Icons.person,"Last name"),
                     validator: (String value){
                       if(value.isEmpty)
                       {
@@ -186,7 +187,7 @@ class _FormPageState extends State<FormPage> {
                     controller: confirmpassword,
                     obscureText: true,
                     keyboardType: TextInputType.text,
-                    decoration:buildInputDecoration(Icons.lock,"Confirm Password"),
+                    decoration:buildInputDecoration(Icons.lock,"Confirm password"),
                     validator: (String value){
                       if(value.isEmpty)
                       {
@@ -227,9 +228,32 @@ class _FormPageState extends State<FormPage> {
                         borderRadius: BorderRadius.circular(50.0),
                         side: BorderSide(color: Colors.blue,width: 2)
                     ),
-                    textColor:Colors.white,child: Text("Submit"),
+                    textColor:Colors.white,child: Text("Register",
+                  style: TextStyle(fontSize: 15),),
 
                   ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(
+                        fontSize:20.0,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.5,
+                        fontFamily: "Roboto"
+                    ),
+
+                ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                  },
+                  child: const Text("Already have an account? Log in here")
                 )
               ],
             ),

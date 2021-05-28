@@ -1,124 +1,175 @@
+import 'dart:convert';
+import 'dart:html';
+import 'dart:io';
+
+import 'Registration.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:select_form_field/select_form_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'InputDeco_design.dart';
+import 'package:http/http.dart' as http;
 
-void main() => runApp(LoginTab());
-
-class LoginTab extends StatelessWidget {
-  // This widget is the root of your application.
+class Login extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'VictimsHelp',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Login'),
-    );
-  }
+  LoginState createState() => LoginState();
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class LoginState extends State<Login> {
+  //TextController to read text entered in text field
+  bool emailExists = false;
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
-    final emailField = TextField(
-      obscureText: true,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Email",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-    final passwordField = TextField(
-      obscureText: true,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Password",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-    final loginButon = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01A0C7),
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {},
-        child: Text("Login",
-            textAlign: TextAlign.center,
-            style: style.copyWith(
-                color: Colors.white, fontWeight: FontWeight.bold)),
-      ),
-    );
-
     return Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
-            child: Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(36.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: 45.0),
-                    emailField,
-                    SizedBox(height: 25.0),
-                    passwordField,
-                    SizedBox(
-                      height: 35.0,
-                    ),
-                    loginButon,
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                  ],
+      body: Center(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formkey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 15,
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                  child: TextFormField(
+                    controller: email,
+                    keyboardType: TextInputType.text,
+                    decoration:buildInputDecoration(Icons.email,"Email"),
+                    validator: (String value){
+                      if(value.isEmpty)
+                      {
+                        return 'Please enter your email';
+                      }
+                      if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
+                        return 'Please a valid email';
+                      }
+                      return null;
+                    },/*
+                    onSaved: (String value){
+                      email.text = value;
+                    },*/
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                  child: TextFormField(
+                    controller: password,
+                    obscureText: true,
+                    keyboardType: TextInputType.text,
+                    decoration:buildInputDecoration(Icons.lock,"Password"),
+                    validator: (String value){
+                      if(value.isEmpty)
+                      {
+                        return 'Please enter your Password';
+                      }// else if(email.)
+                      return null;
+                    },
+
+                  ),
+                ),
+                SizedBox(
+                  width: 200,
+                  height: 50,
+                  child: RaisedButton(
+                    color: Colors.redAccent,
+                    onPressed: (){
+
+                      if(_formkey.currentState.validate())
+                      {
+                        emailExists = false;
+                        LoginSubmit();
+                          print("Successful");
+
+                          return;
+                      }else{
+                        print("Failed");
+                      }
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        side: BorderSide(color: Colors.blue,width: 2)
+                    ),
+                    textColor:Colors.white,child: Text("Login",
+                    style: TextStyle(fontSize: 15),),
+
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(
+                        fontSize:20.0,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.5,
+                        fontFamily: "Roboto"
+                    ),
+
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Go back")
+                )
+              ],
             ),
           ),
-        )
+        ),
+      ),
     );
+  }
+
+  /*
+  bool CheckEmailPassword(TextEditingController email) async{
+    //String token = await getToken();
+    http.Response response = await http.post(Uri.https('localhost:44322', '/api/account/login'),
+        headers: {"Content-Type": "application/json-patch+json"},
+        //HttpHeaders.authorizationHeader: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZW1haWxAdGV4dC5jb20iLCJJZCI6IjFiZTMwN2NmLTVmMTktNGE4OS01MWQyLTA4ZDkyMWJjOTc0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNsaWVudCIsIm5iZiI6MTYyMjE5NDg0MiwiZXhwIjoxNjIyNjI2ODQyLCJpc3MiOiJWaWN0aW1zSGVscCJ9.nAjKD3UsMTGc9kpJCwTgB1vsTJHhPzTFND7dHTnF2kM"},
+        body: body);
+  }*/
+
+  Future LoginSubmit() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    var mapeddate = {
+      'email': email.text,
+      'password': password.text
+    };
+    print("JSON DATA: ${mapeddate}");
+
+    //mb fix
+    var body = jsonEncode(mapeddate);
+
+    print("JSON ENCODED DATA: ${body}");
+
+    //String token = await getToken();
+    http.Response response = await http.post(Uri.https('localhost:44322', '/api/account/login'),
+        headers: {"Content-Type": "application/json-patch+json"},
+        //HttpHeaders.authorizationHeader: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZW1haWxAdGV4dC5jb20iLCJJZCI6IjFiZTMwN2NmLTVmMTktNGE4OS01MWQyLTA4ZDkyMWJjOTc0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNsaWVudCIsIm5iZiI6MTYyMjE5NDg0MiwiZXhwIjoxNjIyNjI2ODQyLCJpc3MiOiJWaWN0aW1zSGVscCJ9.nAjKD3UsMTGc9kpJCwTgB1vsTJHhPzTFND7dHTnF2kM"},
+        body: body);
+    //var data = jsonDecode(response.body);
+
+    var token = response.body;
+
+    if (token == "Invalid credentials.")
+      emailExists = true;
+    print("Token: ${token}");
+    print(pref.toString());
+    print(response.statusCode);
+    //print("DATA: ${data}");
+
+
+
+
   }
 }

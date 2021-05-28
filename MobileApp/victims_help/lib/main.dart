@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:victims_help/FormPage.dart';
+import 'package:victims_help/Article_list.dart';
+import 'package:victims_help/Registration.dart';
 import 'package:victims_help/Login.dart';
-import 'package:victims_help/Register.dart';
 import 'Info.dart';
 import 'Chat.dart';
 import 'Calendar.dart';
@@ -41,11 +41,11 @@ class MyAppState extends State<MyApp> {
 
   int _selectedTab = 0;
   final _pageOptions = [
-    InfoTab(),
+    ArticleList(),
     //make chat
     InfoTab(),
     CalendarTab(),
-    FormPage(),
+    Registration(),
   ];
   @override
   Widget build(BuildContext context) {
