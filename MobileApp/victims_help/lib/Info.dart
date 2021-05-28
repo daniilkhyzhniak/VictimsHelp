@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 Future<Article> fetchArticle() async {
   final response =
-  await http.get(Uri.https('localhost:44322', 'api/articles/72fe5af5-2a2f-4292-90c0-03aed8671ff0'));
+  await http.get(Uri.https('localhost:44322', 'api/articles/9ac64c34-d62d-40ce-babc-161654a03756'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -20,7 +20,7 @@ Future<Article> fetchArticle() async {
   }
 }
 
-void main() => runApp(InfoTab());
+void main() => runApp(MaterialApp(home:InfoTab()));
 
 class InfoTab extends StatefulWidget {
 

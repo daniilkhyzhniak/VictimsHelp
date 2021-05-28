@@ -1,140 +1,164 @@
-import 'package:provider/provider.dart';
-
-/*import 'package:flushbar/flushbar.dart';
+/*
 import 'package:flutter/material.dart';
-import 'package:jada/domain/user.dart';
-import 'package:jada/providers/auth.dart';
-import 'package:jada/providers/user_provider.dart';
-import 'package:jada/util/validators.dart';
-import 'package:jada/util/widgets.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'package:select_form_field/select_form_field.dart';
 
-class Register extends StatefulWidget {
+
+class RegisterForm extends StatefulWidget {
+  const RegisterForm({Key key}) : super(key: key);
+
   @override
-  _RegisterState createState() => _RegisterState();
+  _RegisterFormState createState() => _RegisterFormState();
 }
 
-class _RegisterState extends State<Register> {
-  final formKey = new GlobalKey<FormState>();
-
-  String _username, _password, _confirmPassword;
+class _RegisterFormState extends State<RegisterForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _agreedToTOS = true;
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider auth = Provider.of<AuthProvider>(context);
-
-    final usernameField = TextFormField(
-      autofocus: false,
-      validator: validateEmail,
-      onSaved: (value) => _username = value,
-      decoration: buildInputDecoration("Confirm password", Icons.email),
-    );
-
-    final passwordField = TextFormField(
-      autofocus: false,
-      obscureText: true,
-      validator: (value) => value.isEmpty ? "Please enter password" : null,
-      onSaved: (value) => _password = value,
-      decoration: buildInputDecoration("Confirm password", Icons.lock),
-    );
-
-    final confirmPassword = TextFormField(
-      autofocus: false,
-      validator: (value) => value.isEmpty ? "Your password is required" : null,
-      onSaved: (value) => _confirmPassword = value,
-      obscureText: true,
-      decoration: buildInputDecoration("Confirm password", Icons.lock),
-    );
-
-    var loading = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        CircularProgressIndicator(),
-        Text(" Registering ... Please wait")
-      ],
-    );
-
-    final forgotLabel = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        FlatButton(
-          padding: EdgeInsets.all(0.0),
-          child: Text("Forgot password?",
-              style: TextStyle(fontWeight: FontWeight.w300)),
-          onPressed: () {
-          },
-        ),
-        FlatButton(
-          padding: EdgeInsets.only(left: 0.0),
-          child: Text("Sign in", style: TextStyle(fontWeight: FontWeight.w300)),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/login');
-          },
-        ),
-      ],
-    );
-
-    var doRegister = () {
-      final form = formKey.currentState;
-      if (form.validate()) {
-        form.save();
-        auth.register(_username, _password, _confirmPassword).then((response) {
-          if (response['status']) {
-            User user = response['data'];
-            Provider.of<UserProvider>(context, listen: false).setUser(user);
-            Navigator.pushReplacementNamed(context, '/dashboard');
-          } else {
-            Flushbar(
-              title: "Registration Failed",
-              message: response.toString(),
-              duration: Duration(seconds: 10),
-            ).show(context);
-          }
-        });
-      } else {
-        Flushbar(
-          title: "Invalid form",
-          message: "Please Complete the form properly",
-          duration: Duration(seconds: 10),
-        ).show(context);
-      }
-
-    };
-
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.all(40.0),
-            child: Form(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 215.0),
-                  label("Email"),
-                  SizedBox(height: 5.0),
-                  usernameField,
-                  SizedBox(height: 15.0),
-                  label("Password"),
-                  SizedBox(height: 10.0),
-                  passwordField,
-                  SizedBox(height: 15.0),
-                  label("Confirm Password"),
-                  SizedBox(height: 10.0),
-                  confirmPassword,
-                  SizedBox(height: 20.0),
-                  auth.registeredInStatus == Status.Registering
-                      ? loading
-                      : longButtons("Register", doRegister),
-                  SizedBox(height: 5.0),
-                  forgotLabel
-                ],
-              ),
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'First name',
             ),
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'First Name is required';
+              }
+            },
           ),
-        ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Last name',
+            ),
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'Last name is required';
+              }
+            },
+          ),
+          const SizedBox(height: 16.0),
+          TextFormField(
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: const InputDecoration(
+              labelText: 'Phone number',
+            ),
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'Phone number is required';
+              }
+            },
+          ),
+          TextFormField(
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: const InputDecoration(
+              labelText: 'Age',
+            ),
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'Age is required';
+              }
+            },
+          ),
+          SelectFormField(
+            type: SelectFormFieldType.dropdown,
+            items: genders,
+            decoration: const InputDecoration(
+              labelText: 'Gender',
+            ),
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'Gender is required';
+              }
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Email',
+            ),
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'Email is required';
+              }
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Password',
+            ),
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'Password is required';
+              }
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Confirm password',
+            ),
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'Confirm password is required';
+              }
+            },
+          ),
+          Row(
+            children: <Widget>[
+              const Spacer(),
+              OutlineButton(
+                highlightedBorderColor: Colors.black,
+                onPressed: _submit,
+                child: const Text('Register'),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
-}*/
+
+  void _submit() {
+    _formKey.currentState.validate();
+    print('Form submitted');
+  }
+}
+
+final List<Map<String, dynamic>> genders = [
+  {
+    'value': 'M',
+    'label': 'Male',
+  },
+  {
+    'value': 'F',
+    'label': 'Female',
+  },
+];
+
+Map<String, String> params = {
+  "first_name": v,
+  "last_name": widget.mUserDetailsInputmodel.lastName,
+  "email": widget.mUserDetailsInputmodel.emailAddress,
+};
+
+Future<String> multipartRequest({var url, var partParams}) async {
+  Map<String, String> headers = {
+    "X-API-KEY": X_API_KEY,
+    "Accept": "application/json",
+    "User-Auth-Token": authToken };
+  var request = http.MultipartRequest("POST", Uri.parse(url));
+  request.headers.addAll(headers);
+
+  if (partParams != null) request.fields.addAll(partParams);// add part params if not null
+
+  var response = await request.send();
+  var responseData = await response.stream.toBytes();
+  var responseString = String.fromCharCodes(responseData);
+  print("responseBody " + responseString);
+  if (response.statusCode == 200) return responseString;
+ */
