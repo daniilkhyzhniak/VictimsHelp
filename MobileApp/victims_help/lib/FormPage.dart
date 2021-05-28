@@ -47,6 +47,7 @@ class _FormPageState extends State<FormPage> {
                 Padding(
                   padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
                   child: TextFormField(
+                    controller: firstName,
                     keyboardType: TextInputType.text,
                     decoration: buildInputDecoration(Icons.person,"First Name"),
                     validator: (String value){
@@ -55,15 +56,16 @@ class _FormPageState extends State<FormPage> {
                         return 'Please enter your first name';
                       }
                       return null;
-                    },
+                    },/*
                     onSaved: (String value){
                       firstName.text = value;
-                    },
+                    },*/
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
                   child: TextFormField(
+                    controller: lastName,
                     keyboardType: TextInputType.text,
                     decoration: buildInputDecoration(Icons.person,"Last Name"),
                     validator: (String value){
@@ -72,15 +74,16 @@ class _FormPageState extends State<FormPage> {
                         return 'Please enter your last name';
                       }
                       return null;
-                    },
+                    },/*
                     onSaved: (String value){
                       lastName.text = value;
-                    },
+                    },*/
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
                   child: TextFormField(
+                    controller: phoneNumber,
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration:buildInputDecoration(Icons.phone,"Phone number"),
@@ -90,15 +93,16 @@ class _FormPageState extends State<FormPage> {
                         return 'Please enter your phone number';
                       }
                       return null;
-                    },
+                    },/*
                     onSaved: (String value){
                       phoneNumber.text = value;
-                    },
+                    },*/
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
                   child: TextFormField(
+                    controller: age,
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration:buildInputDecoration(Icons.access_time,"Age"),
@@ -112,15 +116,16 @@ class _FormPageState extends State<FormPage> {
                         return 'Please enter a valid age';
                       }
                       return null;
-                    },
+                    },/*
                     onSaved: (String value){
-                      age.text = value;
-                    },
+                      age = int.parse(value);
+                    },*/
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
                   child: SelectFormField(
+                    controller: gender,
                     type: SelectFormFieldType.dropdown,
                     items: genders,
                     decoration:buildInputDecoration(Icons.wc,"Gender"),
@@ -130,15 +135,16 @@ class _FormPageState extends State<FormPage> {
                         return 'Gender is required';
                       }
                       return null;
-                    },
+                    },/*
                     onSaved: (String value){
-                      gender.text = "M";
-                    },
+                      gender.text = value;
+                    },*/
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
                   child: TextFormField(
+                    controller: email,
                     keyboardType: TextInputType.text,
                     decoration:buildInputDecoration(Icons.email,"Email"),
                     validator: (String value){
@@ -150,10 +156,10 @@ class _FormPageState extends State<FormPage> {
                         return 'Please a valid email';
                       }
                       return null;
-                    },
+                    },/*
                     onSaved: (String value){
                       email.text = value;
-                    },
+                    },*/
                   ),
                 ),
 
@@ -251,7 +257,7 @@ class _FormPageState extends State<FormPage> {
         'firstName': firstName.text,
         'lastName': lastName.text,
         'phoneNumber': phoneNumber.text,
-        'age': age.text,
+        'age': int.parse(age.text),
         'gender': gender.text,
         'email': email.text,
         'password': password.text,
@@ -265,19 +271,18 @@ class _FormPageState extends State<FormPage> {
       print("JSON ENCODED DATA: ${body}");
 
       //String token = await getToken();
-      try {
         http.Response response = await http.post(Uri.https('localhost:44322', '/api/account/register'),
             headers: {"Content-Type": "application/json-patch+json"},
             //HttpHeaders.authorizationHeader: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZW1haWxAdGV4dC5jb20iLCJJZCI6IjFiZTMwN2NmLTVmMTktNGE4OS01MWQyLTA4ZDkyMWJjOTc0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNsaWVudCIsIm5iZiI6MTYyMjE5NDg0MiwiZXhwIjoxNjIyNjI2ODQyLCJpc3MiOiJWaWN0aW1zSGVscCJ9.nAjKD3UsMTGc9kpJCwTgB1vsTJHhPzTFND7dHTnF2kM"},
             body: body);
-        var data = jsonDecode(response.body);
+        //var data = jsonDecode(response.body);
 
+        var token = response.body;
+
+        print(token);
         print(pref.toString());
         print(response.statusCode);
-        print("DATA: ${data}");
-      } catch(error) {
-        print(error.toString());
-      }
+        //print("DATA: ${data}");
 
 
 
