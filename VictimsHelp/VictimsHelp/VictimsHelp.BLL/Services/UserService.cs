@@ -62,7 +62,7 @@ namespace VictimsHelp.BLL.Services
 
                 return claims;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new List<Claim>();
             }
@@ -128,6 +128,7 @@ namespace VictimsHelp.BLL.Services
 
                 var user = await _users
                     .Include(u => u.UserRoles)
+                    .ThenInclude(ur => ur.Role)
                     .FirstOrDefaultAsync(u => u.Email == model.Email);
 
                 if (user is null)
@@ -140,6 +141,7 @@ namespace VictimsHelp.BLL.Services
                 user.Age = model.Age;
                 user.PhoneNumber = model.PhoneNumber;
                 user.Gender = model.Gender;
+                user.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
                 await EditUserRolesAsync(user, model.Roles);
 

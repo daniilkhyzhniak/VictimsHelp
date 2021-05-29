@@ -29,5 +29,10 @@ namespace VictimsHelp.PL.ViewModels.Account
 
         [Display(Name = "Psychologist email")]
         public string PsychologistEmail { get; set; }
+
+        [Required(ErrorMessage = "Password field is required")]
+        [Display(Name = "Password")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
     }
 }
