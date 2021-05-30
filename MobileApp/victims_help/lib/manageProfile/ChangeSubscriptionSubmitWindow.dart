@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:victims_help/models/psychologist.dart';
 import 'package:victims_help/models/user.dart';
 import 'package:victims_help/main.dart';
 import 'package:victims_help/Login.dart';
@@ -54,7 +55,7 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
                 child: RaisedButton(
                     color: Colors.redAccent,
                     onPressed: () {
-                      GetPsychologistsEmails();
+                      GetPsychologistsEmails(0);
                       //ChangeSubscriptionSubmitWindowSubmit();
                     },
                     shape: RoundedRectangleBorder(
@@ -83,7 +84,7 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
         body: body);
   }*/
 
-  Future GetPsychologistsEmails() async{
+  Future<Psychologist> GetPsychologistsEmails(int index) async{
     final response =
     await http.get(Uri.https('localhost:44322', 'api/psychologists'),
       headers: {
@@ -97,7 +98,7 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
 
     if (response.statusCode == 200) {
       print(jsonDecode(response.body));
-      return jsonDecode(response.body);
+      return Psychologist.fromJson(jsonDecode(response.body));
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.

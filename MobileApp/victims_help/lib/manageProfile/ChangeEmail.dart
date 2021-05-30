@@ -57,7 +57,7 @@ class ChangeEmailState extends State<ChangeEmail> {
                   child: TextFormField(
                     controller: email,
                     keyboardType: TextInputType.text,
-                    decoration: buildInputDecoration(Icons.person, MyAppState.emailOriginal),
+                    decoration: buildInputDecoration(Icons.email, MyAppState.emailOriginal),
                     validator: (String value){
                       if(value.isEmpty)
                       {
