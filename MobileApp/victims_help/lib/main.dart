@@ -5,7 +5,7 @@ import 'package:victims_help/Login.dart';
 import 'Info.dart';
 import 'Chat.dart';
 import 'Calendar.dart';
-import 'Account.dart';
+import 'AccountInfo.dart';
 import 'package:provider/provider.dart';
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
@@ -19,34 +19,29 @@ class MyApp extends StatefulWidget {
   }
 }
 class MyAppState extends State<MyApp> {
-  /*
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  new FlutterLocalNotificationsPlugin();
-  var initializationSettingAndroid;
-  var initializationSetting;
-  void _showNotification(){
+  static String token;
+  static String firstNameOriginal;
+  static String lastNameOriginal;
+  static String phoneNumberOriginal;
+  static String genderOriginal;
+  static String emailOriginal;
+  static int ageOriginal;
+  static String psychologistEmailOriginal;
+  static String passwordOriginal;
 
-  }
-  @override
-  void initState() {
-    super.initState();
-    initializationSettingAndroid = new AndroidInitializationSettings('defaultIcon');
-  }
-
-  Future onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async{
-
-  }
-  */
-
-  int _selectedTab = 0;
-  final _pageOptions = [
+  int _selectedTab = 3;
+  List<Widget> _pageOptions = [
     ArticleList(),
     //make chat
     InfoTab(),
     CalendarTab(),
     Registration(),
   ];
+
+  void changeToAccountInfo() {
+    _pageOptions[3] = AccountInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -91,4 +86,5 @@ class MyAppState extends State<MyApp> {
         ),
       ),
     );
-  }}
+  }
+}
