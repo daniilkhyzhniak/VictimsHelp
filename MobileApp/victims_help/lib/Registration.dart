@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'dart:html';
 import 'dart:io';
 
+import 'AccountInfo.dart';
+import 'main.dart';
 import 'package:victims_help/Login.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,8 @@ class RegistrationState extends State<Registration> {
   TextEditingController password = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
 
+  //TextEditingController get firstName => this.firstName;
+
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
@@ -42,8 +45,12 @@ class RegistrationState extends State<Registration> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  "Registration",
+                  style: new TextStyle(fontSize: 32)
+                ),
                 SizedBox(
-                  height: 15,
+                  height: 30,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
@@ -154,7 +161,7 @@ class RegistrationState extends State<Registration> {
                         return 'Please enter your email';
                       }
                       if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
-                        return 'Please a valid email';
+                        return 'Please enter a valid email';
                       }
                       return null;
                     },/*
@@ -174,7 +181,7 @@ class RegistrationState extends State<Registration> {
                     validator: (String value){
                       if(value.isEmpty)
                       {
-                        return 'Please enter your Password';
+                        return 'Please enter your password';
                       }
                       return null;
                     },
@@ -248,6 +255,7 @@ class RegistrationState extends State<Registration> {
 
                 ),
                   onPressed: () {
+                    //builder: (context) => LoginState();
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Login()),
@@ -300,10 +308,14 @@ class RegistrationState extends State<Registration> {
             //HttpHeaders.authorizationHeader: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZW1haWxAdGV4dC5jb20iLCJJZCI6IjFiZTMwN2NmLTVmMTktNGE4OS01MWQyLTA4ZDkyMWJjOTc0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNsaWVudCIsIm5iZiI6MTYyMjE5NDg0MiwiZXhwIjoxNjIyNjI2ODQyLCJpc3MiOiJWaWN0aW1zSGVscCJ9.nAjKD3UsMTGc9kpJCwTgB1vsTJHhPzTFND7dHTnF2kM"},
             body: body);
         //var data = jsonDecode(response.body);
+        MyAppState.token = response.body;
 
-        var token = response.body;
-
-        print(token);
+    if (response.statusCode == 200)
+    {
+      MyAppState.passwordOriginal = password.text;
+      Navigator.push(context, MaterialPageRoute(builder: (context) => NewNavBar()));
+    }
+        print(MyAppState.token);
         print(pref.toString());
         print(response.statusCode);
         //print("DATA: ${data}");

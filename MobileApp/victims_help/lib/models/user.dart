@@ -1,31 +1,27 @@
 class User {
-  int userId;
   String firstName;
   String lastName;
   String phoneNumber;
   int age;
   String gender;
+  String psychologistEmail;
   String email;
   String password;
   String confirmPassword;
-  String token;
-  String renewalToken;
 
-  User({this.userId, this.firstName, this.lastName, this.phoneNumber, this.age, this.gender, this.email, this.password, this.confirmPassword, this.token, this.renewalToken});
+  User({this.firstName, this.lastName, this.phoneNumber, this.age, this.gender, this.psychologistEmail, this.email, this.password, this.confirmPassword});
 
   factory User.fromJson(Map<String, dynamic> responseData) {
     return User(
-        userId: responseData['id'],
         firstName: responseData['firstName'],
         lastName: responseData['lastName'],
         phoneNumber: responseData['phoneNumber'],
         age: responseData['age'],
         gender: responseData['gender'],
+        psychologistEmail: responseData['psychologistEmail'],
         email: responseData['email'],
         password: responseData['password'],
         confirmPassword: responseData['confirmPassword'],
-        token: responseData['access_token'],
-        renewalToken: responseData['renewal_token']
     );
   }
 }

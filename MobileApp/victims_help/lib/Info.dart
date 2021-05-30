@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 import 'models/article.dart';
 
+import 'Article_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-Future<Article> fetchArticle() async {
+Future<Article> fetchArticle(String id) async {
   final response =
-  await http.get(Uri.https('localhost:44322', 'api/articles/9ac64c34-d62d-40ce-babc-161654a03756'));
+  await http.get(Uri.https('localhost:44322', 'api/articles/' + id));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -34,12 +35,21 @@ class _MyAppState extends State<InfoTab> {
   @override
   void initState() {
     super.initState();
-    futureArticle = fetchArticle();
+    futureArticle = fetchArticle(ArticleListState.ArticleId);
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: AppBar(
+        title: Text('VictimsHelp'),
+        automaticallyImplyLeading: true,
+        leading: IconButton(icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body:
       new Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
