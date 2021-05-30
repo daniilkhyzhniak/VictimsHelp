@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VictimsHelp.PL", "VictimsHelp.PL\VictimsHelp.PL.csproj", "{96BEB7A2-BC5F-419A-9308-89DA4C910026}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VictimsHelp.DAL", "VictimsHelp.DAL\VictimsHelp.DAL.csproj", "{2AA94433-424D-43F8-9047-3F650F4D18ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VictimsHelp.DAL", "VictimsHelp.DAL\VictimsHelp.DAL.csproj", "{2AA94433-424D-43F8-9047-3F650F4D18ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VictimsHelp.BLL", "VictimsHelp.BLL\VictimsHelp.BLL.csproj", "{E60DA9F5-F9F3-4308-9F09-55BF6C3FBE36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VictimsHelp.BLL", "VictimsHelp.BLL\VictimsHelp.BLL.csproj", "{E60DA9F5-F9F3-4308-9F09-55BF6C3FBE36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

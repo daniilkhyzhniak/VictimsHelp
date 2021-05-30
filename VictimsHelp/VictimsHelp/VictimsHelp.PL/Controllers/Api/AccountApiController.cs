@@ -113,10 +113,20 @@ namespace VictimsHelp.PL.Controllers.Api
 
                 await _userService.EditAsync(user);
 
-                return RedirectToAction("Profile", new { email = model.Email });
+                return Ok("Profile updated.");
             }
 
             return BadRequest("Model state is not valid.");
+        }
+
+        [HttpDelete("profile/remove")]
+        public async Task<IActionResult> Delete()
+        {
+            var email = User.Identity.Name;
+
+            await _userService.DeleteByEmailAsync(email);
+
+            return Ok("Profile deleted.");
         }
     }
 }

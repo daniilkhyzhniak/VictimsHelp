@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VictimsHelp.BLL.Contracts;
 using VictimsHelp.BLL.Models;
@@ -53,12 +54,14 @@ namespace VictimsHelp.BLL.Services
             {
                 var article = await _articles.FirstOrDefaultAsync(u => u.Id == id);
 
-                if (article != null)
+                if (article is null)
                 {
                     return;
                 }
 
-                _articles.Remove(article);
+                article.IsDeleted = true;
+
+                _articles.Update(article);
                 await _context.SaveChangesAsync();
             }
             catch (Exception)
@@ -96,7 +99,9 @@ namespace VictimsHelp.BLL.Services
         {
             try
             {
-                var articles = await _articles.ToListAsync();
+                var articles = await _articles
+                    .Where(a => !a.IsDeleted)
+                    .ToListAsync();
 
                 var models = _mapper.Map<IEnumerable<ArticleModel>>(articles);
 
@@ -112,7 +117,9 @@ namespace VictimsHelp.BLL.Services
         {
             try
             {
-                var article = await _articles.FirstOrDefaultAsync(a => a.Id == id);
+                var article = await _articles
+                    .Where(u => !u.IsDeleted)
+                    .FirstOrDefaultAsync(a => a.Id == id);
 
                 var model = _mapper.Map<ArticleModel>(article);
 
