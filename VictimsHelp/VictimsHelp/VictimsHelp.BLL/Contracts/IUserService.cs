@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using VictimsHelp.BLL.Models;
-using VictimsHelp.DAL.Entities;
 
 namespace VictimsHelp.BLL.Contracts
 {
