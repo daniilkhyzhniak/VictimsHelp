@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:http_client/http_client.dart' as http;
+import 'package:http/io_client.dart';
+import 'dart:io';
+
 import 'package:victims_help/models/psychologist.dart';
 import 'package:victims_help/models/user.dart';
 import 'package:victims_help/main.dart';
@@ -23,6 +27,26 @@ class ChangeSubscriptionSubmitWindow extends StatefulWidget {
 class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmitWindow> {
   //TextController to read text entered in text field
   TextEditingController password = TextEditingController();
+  Future<Psychologist> futurePsychologist;
+  String psyEmail;
+
+  @override
+  void initState() {
+    super.initState();
+
+    FutureBuilder(
+        future: futurePsychologist = GetPsychologistsEmails(0),
+        builder: (context, snapshot) {
+          if (snapshot.hasData){
+            futurePsychologist = snapshot.data;
+            psyEmail = snapshot.data.email;
+            print("EMAIL: " + snapshot.data.email);
+            print("EMAIL: " + psyEmail);
+          }
+          return;
+        });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,25 +73,35 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
               SizedBox(
                 height: 30,
               ),
-              SizedBox(
-                width: 200,
-                height: 50,
-                child: RaisedButton(
-                    color: Colors.redAccent,
-                    onPressed: () {
-                      GetPsychologistsEmails(0);
-                      //ChangeSubscriptionSubmitWindowSubmit();
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                        side: BorderSide(color: Colors.blue,width: 2)
-                    ),
-                    textColor:Colors.white,child: Text("Confirm",
-                  style: TextStyle(fontSize: 15),
-                )
 
-                ),
+    FutureBuilder<Psychologist>(
+    future: futurePsychologist = GetPsychologistsEmails(0),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return SizedBox(
+          width: 200,
+          height: 50,
+          child: RaisedButton(
+              color: Colors.redAccent,
+              onPressed: () {
+                psyEmail = snapshot.data.email;
+                ChangeSubscriptionSubmitWindowSubmit();
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                  side: BorderSide(color: Colors.blue, width: 2)
               ),
+              textColor: Colors.white,
+              child: Text("Confirm",
+                style: TextStyle(fontSize: 15),
+              )
+
+          ),
+        );
+      } else {
+        return Text("");
+      }
+    }),
             ],
           ),
         ),
@@ -85,20 +119,24 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
   }*/
 
   Future<Psychologist> GetPsychologistsEmails(int index) async{
+    final ioc = new HttpClient();
+    ioc.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final http = new IOClient(ioc);
+
     final response =
-    await http.get(Uri.https('localhost:44322', 'api/psychologists'),
+    await http.get(Uri.https('10.0.2.2:44322', 'api/psychologists'),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + MyAppState.token
       }
       );
-
+    print(MyAppState.token);
     print(response.statusCode);
-
     if (response.statusCode == 200) {
       print(jsonDecode(response.body));
-      return Psychologist.fromJson(jsonDecode(response.body));
+      return Psychologist.fromJson(jsonDecode(response.body)[index]);
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
@@ -106,7 +144,38 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
     }
   }
 
+  Future<Psychologist> MakeDeclaration() async{
+    final ioc = new HttpClient();
+    ioc.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final http = new IOClient(ioc);
+
+    print(psyEmail);
+
+    //String token = await getToken();
+    final response = await http.post(Uri.https('10.0.2.2:44322', 'api/psychologists/declaration/' + psyEmail),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + MyAppState.token
+        });
+
+    print("Token: ${MyAppState.token}");
+    print(response.statusCode);
+
+    if (response.statusCode == 200)
+    {
+      ChangeSubscriptionSubmitWindowSubmit();
+    }
+    //print("DATA: ${data}");
+  }
+
   Future ChangeSubscriptionSubmitWindowSubmit() async{
+    final ioc = new HttpClient();
+    ioc.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final http = new IOClient(ioc);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     var mapeddate = {
@@ -116,7 +185,7 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
       'phoneNumber': MyAppState.phoneNumberOriginal,
       'age': MyAppState.ageOriginal,
       'gender': MyAppState.genderOriginal,
-      'psychologistEmail': null,
+      'psychologistEmail': psyEmail,
       'password': MyAppState.passwordOriginal
     };
     print("JSON DATA: ${mapeddate}");
@@ -127,7 +196,7 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
     print("JSON ENCODED DATA: ${body}");
 
     //String token = await getToken();
-    http.Response response = await http.put(Uri.https('localhost:44322', '/api/account/profile/update'),
+    final response = await http.put(Uri.https('10.0.2.2:44322', '/api/account/profile/update'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -140,8 +209,9 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
     print(response.statusCode);
     //print("DATA: ${data}");
 
-    if (response.statusCode == 200 || response.statusCode == 405)
+    if (response.statusCode == 200)
     {
+      MyAppState.psychologistEmailOriginal = psyEmail;
       Navigator.pop(context);
       Navigator.pop(context);
       Navigator.push(context, MaterialPageRoute(builder: (context) => NewNavBar()));

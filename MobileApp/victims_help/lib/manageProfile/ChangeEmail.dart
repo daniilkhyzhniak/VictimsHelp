@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'dart:html';
+
+import 'package:http_client/http_client.dart' as http;
+import 'package:http/io_client.dart';
 import 'dart:io';
 
 import 'package:victims_help/models/user.dart';
@@ -76,7 +78,7 @@ class ChangeEmailState extends State<ChangeEmail> {
 
                       if(_formkey.currentState.validate())
                       {
-                        ChangeNameSubmit();
+                        ChangeEmailSubmit();
                         print("Successful");
 
                         return;
@@ -110,7 +112,12 @@ class ChangeEmailState extends State<ChangeEmail> {
         body: body);
   }*/
 
-  Future ChangeNameSubmit() async{
+  Future ChangeEmailSubmit() async{
+    final ioc = new HttpClient();
+    ioc.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final http = new IOClient(ioc);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     var mapeddate = {
@@ -131,7 +138,7 @@ class ChangeEmailState extends State<ChangeEmail> {
     print("JSON ENCODED DATA: ${body}");
 
     //String token = await getToken();
-    http.Response response = await http.put(Uri.https('localhost:44322', '/api/account/profile/update'),
+    final response = await http.put(Uri.https('10.0.2.2:44322', '/api/account/profile/update'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -144,9 +151,10 @@ class ChangeEmailState extends State<ChangeEmail> {
     print(response.statusCode);
     //print("DATA: ${data}");
 
-    if (response.statusCode == 200 || response.statusCode == 405)
+    if (response.statusCode == 200)
     {
       MyAppState.emailOriginal = email.text;
+      print(MyAppState.emailOriginal);
       Navigator.pop(context);
       Navigator.pop(context);
       Navigator.push(context, MaterialPageRoute(builder: (context) => NewNavBar()));
