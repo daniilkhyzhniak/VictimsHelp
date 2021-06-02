@@ -1,4 +1,7 @@
 import 'dart:convert';
+
+import 'package:http_client/http_client.dart' as http;
+import 'package:http/io_client.dart';
 import 'dart:io';
 
 import 'package:victims_help/main.dart';
@@ -165,7 +168,7 @@ class AccountInfoState extends State<AccountInfo> {
                               child: Text(snapshot.data.email,
                                 style: new TextStyle(fontSize:24.0,
                                     color: const Color(0xFF000000),
-                                    fontWeight: FontWeight.w200,
+                                    fontWeight: FontWeight.w300,
                                     fontFamily: "Roboto"),
                               )
                           )
@@ -198,7 +201,7 @@ class AccountInfoState extends State<AccountInfo> {
                 ),
                 SizedBox(
                   height: 15,
-                ),
+                ),/*
                 SizedBox(
                   width: 200,
                   height: 50,
@@ -218,7 +221,7 @@ class AccountInfoState extends State<AccountInfo> {
                 ),
                 SizedBox(
                   height: 15,
-                ),
+                ),*/
                 SizedBox(
                   width: 200,
                   height: 50,
@@ -252,7 +255,8 @@ class AccountInfoState extends State<AccountInfo> {
                         side: BorderSide(color: Colors.black45,width: 2)
                     ),
                     textColor:Colors.white,child: Text("Change subscription plan",
-                    style: TextStyle(fontSize: 15),),
+                    style: TextStyle(fontSize: 15),
+                  textAlign: TextAlign.center),
 
                   ),
                 ),
@@ -305,11 +309,16 @@ class AccountInfoState extends State<AccountInfo> {
       );
   }
 
-  Future<User> GetAccountInfo() async{
+  Future<User> GetAccountInfo() async {
+  final ioc = new HttpClient();
+  ioc.badCertificateCallback =
+  (X509Certificate cert, String host, int port) => true;
+  final http = new IOClient(ioc);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     //String token = await getToken();
-    http.Response response = await http.get(Uri.https('localhost:44322', '/api/account/profile'),
+    final response = await http.get(Uri.https('10.0.2.2:44322', '/api/account/profile'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

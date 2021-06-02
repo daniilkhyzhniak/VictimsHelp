@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:http_client/http_client.dart' as http;
+import 'package:http/io_client.dart';
+import 'dart:io';
+
 import 'package:victims_help/models/user.dart';
 import 'package:victims_help/main.dart';
 import 'package:victims_help/Login.dart';
@@ -40,10 +44,14 @@ class DeleteAccountState extends State<DeleteAccount> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                Align(
+                  alignment: Alignment.center,
+                    child: Text(
                     "Are you sure you want to delete your account?",
-                    style: new TextStyle(fontSize: 32)
+                    style: TextStyle(fontSize: 32)
+                )
                 ),
+
                 SizedBox(
                   height: 30,
                 ),
@@ -82,41 +90,29 @@ class DeleteAccountState extends State<DeleteAccount> {
   }*/
 
   Future DeleteAccountSubmit() async{
-    SharedPreferences pref = await SharedPreferences.getInstance();
-
-    var mapeddate = {
-      'email': MyAppState.emailOriginal,
-      'firstName': MyAppState.firstNameOriginal,
-      'lastName': MyAppState.lastNameOriginal,
-      'phoneNumber': MyAppState.phoneNumberOriginal,
-      'age': MyAppState.ageOriginal,
-      'gender': MyAppState.genderOriginal,
-      'psychologistEmail': null
-    };
-    print("JSON DATA: ${mapeddate}");
-
-    //mb fix
-    var body = jsonEncode(mapeddate);
-
-    print("JSON ENCODED DATA: ${body}");
+    final ioc = new HttpClient();
+    ioc.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final http = new IOClient(ioc);
 
     //String token = await getToken();
-    http.Response response = await http.put(Uri.https('localhost:44322', '/api/account/profile/update'),
+    final response = await http.delete(Uri.https('10.0.2.2:44322', '/api/account/profile/remove'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Authorization': 'Bearer ' + MyAppState.token
-        },
-        body: body);
+        });
 
     print("Token: ${MyAppState.token}");
-    print(pref.toString());
     print(response.statusCode);
     //print("DATA: ${data}");
 
     if (response.statusCode == 200)
     {
+      MyAppState.token = null;
       Navigator.pop(context);
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
     }
     else {
       //new Text("Invalid email or password");

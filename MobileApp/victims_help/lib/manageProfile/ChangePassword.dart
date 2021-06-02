@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:http_client/http_client.dart' as http;
+import 'package:http/io_client.dart';
+import 'dart:io';
+
 import 'package:victims_help/models/user.dart';
 import 'package:victims_help/main.dart';
 import 'package:victims_help/Login.dart';
@@ -110,6 +114,11 @@ class ChangePasswordState extends State<ChangePassword> {
   }*/
 
   Future ChangeNameSubmit() async{
+    final ioc = new HttpClient();
+    ioc.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final http = new IOClient(ioc);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     var mapeddate = {
@@ -130,7 +139,7 @@ class ChangePasswordState extends State<ChangePassword> {
     print("JSON ENCODED DATA: ${body}");
 
     //String token = await getToken();
-    http.Response response = await http.put(Uri.https('localhost:44322', '/api/account/profile/update'),
+    final response = await http.put(Uri.https('10.0.2.2:44322', '/api/account/profile/update'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -143,7 +152,7 @@ class ChangePasswordState extends State<ChangePassword> {
     print(response.statusCode);
     //print("DATA: ${data}");
 
-    if (response.statusCode == 200 || response.statusCode == 405)
+    if (response.statusCode == 200)
     {
       MyAppState.passwordOriginal = password.text;
       Navigator.pop(context);

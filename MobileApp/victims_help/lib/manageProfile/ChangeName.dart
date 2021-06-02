@@ -1,5 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
+
+import 'package:http_client/http_client.dart' as http;
+import 'package:http/io_client.dart';
+import 'dart:io';
 
 import 'package:victims_help/models/user.dart';
 import 'package:victims_help/main.dart';
@@ -12,7 +17,7 @@ import 'package:select_form_field/select_form_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:victims_help/InputDeco_design.dart';
 import 'package:victims_help/AccountInfo.dart';
-import 'package:http/http.dart' as http;
+
 
 class ChangeName extends StatefulWidget {
   @override
@@ -126,6 +131,11 @@ class ChangeNameState extends State<ChangeName> {
   }*/
 
   Future ChangeNameSubmit() async{
+    final ioc = new HttpClient();
+    ioc.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final http = new IOClient(ioc);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     var mapeddate = {
@@ -146,7 +156,7 @@ class ChangeNameState extends State<ChangeName> {
     print("JSON ENCODED DATA: ${body}");
 
     //String token = await getToken();
-    http.Response response = await http.put(Uri.https('localhost:44322', '/api/account/profile/update'),
+    final response = await http.put(Uri.https('10.0.2.2:44322', '/api/account/profile/update'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -159,7 +169,7 @@ class ChangeNameState extends State<ChangeName> {
     print(response.statusCode);
     //print("DATA: ${data}");
 
-    if (response.statusCode == 200 || response.statusCode == 405)
+    if (response.statusCode == 200)
     {
       MyAppState.firstNameOriginal = firstName.text;
       MyAppState.lastNameOriginal = lastName.text;

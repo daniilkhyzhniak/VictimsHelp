@@ -2,13 +2,22 @@ import 'dart:async';
 import 'dart:convert';
 import 'models/article.dart';
 
+import 'package:http_client/http_client.dart' as http;
+import 'package:http/io_client.dart';
+import 'dart:io';
+
 import 'Article_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<Article> fetchArticle(String id) async {
+  final ioc = new HttpClient();
+  ioc.badCertificateCallback =
+      (X509Certificate cert, String host, int port) => true;
+  final http = new IOClient(ioc);
+
   final response =
-  await http.get(Uri.https('localhost:44322', 'api/articles/' + id));
+  await http.get(Uri.https('10.0.2.2:44322', 'api/articles/' + id));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -50,8 +59,9 @@ class _MyAppState extends State<InfoTab> {
           },
         ),
       ),
-      body:
-      new Column(
+      body: Center(
+        child: SingleChildScrollView(
+      child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,7 +104,7 @@ class _MyAppState extends State<InfoTab> {
                           child: Text("           " + snapshot.data.text,
                           style: new TextStyle(fontSize:24.0,
                               color: const Color(0xFF000000),
-                              fontWeight: FontWeight.w200,
+                              fontWeight: FontWeight.w300,
                               fontFamily: "Roboto"),
                           )
                       )
@@ -110,6 +120,8 @@ class _MyAppState extends State<InfoTab> {
           ]
 
       ),
+    )
+      )
 
     );
   }

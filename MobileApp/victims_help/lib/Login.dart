@@ -1,4 +1,7 @@
 import 'dart:convert';
+
+import 'package:http_client/http_client.dart' as http;
+import 'package:http/io_client.dart';
 import 'dart:io';
 
 import 'main.dart';
@@ -135,6 +138,11 @@ class LoginState extends State<Login> {
   }*/
 
   Future LoginSubmit() async{
+    final ioc = new HttpClient();
+    ioc.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final http = new IOClient(ioc);
+
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     var mapeddate = {
@@ -149,33 +157,27 @@ class LoginState extends State<Login> {
     print("JSON ENCODED DATA: ${body}");
 
     //String token = await getToken();
-    http.Response response = await http.post(Uri.https('localhost:44322', '/api/account/login'),
+    final response = await http.post(Uri.https('10.0.2.2:44322', '/api/account/login'),
         headers: {"Content-Type": "application/json-patch+json"},
         //HttpHeaders.authorizationHeader: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZW1haWxAdGV4dC5jb20iLCJJZCI6IjFiZTMwN2NmLTVmMTktNGE4OS01MWQyLTA4ZDkyMWJjOTc0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNsaWVudCIsIm5iZiI6MTYyMjE5NDg0MiwiZXhwIjoxNjIyNjI2ODQyLCJpc3MiOiJWaWN0aW1zSGVscCJ9.nAjKD3UsMTGc9kpJCwTgB1vsTJHhPzTFND7dHTnF2kM"},
         body: body);
     //var data = jsonDecode(response.body);
 
-    MyAppState.token = response.body;
 
-    if (MyAppState.token == "Invalid credentials.")
-      {
-        emailExists = true;
-      }
-
-    print("Token: ${MyAppState.token}");
-    print(pref.toString());
-    print(response.statusCode);
     //print("DATA: ${data}");
 
     if (response.statusCode == 200)
       {
+        MyAppState.token = response.body;
           MyAppState.passwordOriginal = password.text;
           Navigator.push(context, MaterialPageRoute(builder: (context) => NewNavBar()));
       }
     else {
       //new Text("Invalid email or password");
     }
-
+    print("Token: ${MyAppState.token}");
+    print(pref.toString());
+    print(response.statusCode);
 
   }
 }
