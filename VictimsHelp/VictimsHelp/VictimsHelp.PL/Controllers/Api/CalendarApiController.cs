@@ -52,7 +52,7 @@ namespace VictimsHelp.PL.Controllers.Api
                 return BadRequest();
             }
 
-            email = HttpContext.User.Identity.Name;
+            email ??= HttpContext.User.Identity.Name;
             var link = await _googleCalendarApiService.OrganizeEmergencyMeetingAsync(email);
 
             return Ok(link);
