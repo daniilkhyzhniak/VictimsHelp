@@ -162,7 +162,5 @@ class ChangeEmailState extends State<ChangeEmail> {
     else {
       //new Text("Invalid email or password");
     }
-
-
   }
 }

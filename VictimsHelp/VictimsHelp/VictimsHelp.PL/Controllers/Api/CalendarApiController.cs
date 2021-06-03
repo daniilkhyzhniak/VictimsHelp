@@ -37,7 +37,7 @@ namespace VictimsHelp.PL.Controllers.Api
 
             var models = _mapper.Map<IEnumerable<EventViewModel>>(events);
 
-            return Ok(models);
+            return Ok(models.Reverse());
         }
         
         /// <summary>

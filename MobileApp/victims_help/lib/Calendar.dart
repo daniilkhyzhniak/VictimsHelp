@@ -33,11 +33,12 @@ Future<Event> getEvent(int index) async {
   );
 
   print(response.statusCode);
+  print("Event: " + response.body);
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print(jsonDecode(response.body)[1]);
+    //print(jsonDecode(response.body)[1]);
     return Event.fromJson(jsonDecode(response.body.toString())[index]);
   } else {
     // If the server did not return a 200 OK response,
@@ -77,7 +78,8 @@ Future addEmergency() async{
   ioc.badCertificateCallback =
       (X509Certificate cert, String host, int port) => true;
   final http = new IOClient(ioc);
-  final response = await http.post(Uri.https('10.0.2.2:44322', '/api/calendar/emergencyCall/' + MyAppState.emailOriginal),
+  final response = await http.post(Uri.https('10.0.2.2:44322', '/api/calendar/emergencyCall/' +
+      MyAppState.emailOriginal),
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -113,7 +115,6 @@ class CalendarTabState extends State<CalendarTab> {
     return Scaffold(
       body: Scrollbar(
         child: ListView(
-          restorationId: 'list_demo_list_view',
           padding: const EdgeInsets.symmetric(vertical: 8,
           horizontal: 40),
           children: [
@@ -123,7 +124,6 @@ class CalendarTabState extends State<CalendarTab> {
               child: RaisedButton(
                 color: Colors.red,
                 onPressed: (){
-                  //launch("http://youtube.com");
                   addEmergency();
                 },
                 shape: RoundedRectangleBorder(
@@ -132,7 +132,6 @@ class CalendarTabState extends State<CalendarTab> {
                 ),
                 textColor:Colors.white,child: Text("Emergency call",
                 style: TextStyle(fontSize: 15),),
-
               ),
             ),
             SizedBox(
@@ -156,8 +155,12 @@ class CalendarTabState extends State<CalendarTab> {
                                       letterSpacing: 0.5,
                                       fontFamily: "Roboto"),
                                 ),
-                                onPressed: () => launch(snapshot.data.hangoutLink.toString()
-                                    .substring(1, snapshot.data.hangoutLink.toString().length - 1)),
+                                onPressed: () {
+                                  print(snapshot.data.hangoutLink.toString()
+                                      .substring(0, snapshot.data.hangoutLink.toString().length - 1));
+                                  launch(snapshot.data.hangoutLink.toString()
+                                      .substring(0, snapshot.data.hangoutLink.toString().length - 1));
+                                },
                                 child: new Text(snapshot.data.start.substring(0, 10) + "\n"
                                  + snapshot.data.summary +
                                 "\n" + snapshot.data.start.substring(11, 16) +

@@ -69,7 +69,9 @@ namespace VictimsHelp.BLL.Services
         {
             try
             {
-                var client = await _users.FirstOrDefaultAsync(
+                var client = await _users.Include(u => u.UserRoles)
+                    .ThenInclude(ur => ur.Role)
+                    .FirstOrDefaultAsync(
                     u => u.Email == clientEmail &&
                     u.UserRoles.Select(ur => ur.Role.Name).Contains(Roles.Client));
 

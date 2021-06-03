@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
   InputDecoration buildInputDecoration(IconData icons,String hinttext) {
   return InputDecoration(
+    contentPadding: new EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
     hintText: hinttext,
     prefixIcon: Icon(icons),
     focusedBorder: OutlineInputBorder(

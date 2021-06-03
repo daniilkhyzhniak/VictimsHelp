@@ -12,6 +12,8 @@ import 'package:http/http.dart' as http;
 
 void main() => runApp(new MyApp());
 
+
+
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -29,11 +31,23 @@ class MyAppState extends State<MyApp> {
   static String psychologistEmailOriginal;
   static String passwordOriginal;
 
+  static void getInfo() {
+    print("Token: " + MyAppState.token);
+    print("First name: " + MyAppState.firstNameOriginal);
+    print("Last name: " + MyAppState.lastNameOriginal);
+    print("Phone number: " + MyAppState.phoneNumberOriginal);
+    print("Gender: " + MyAppState.genderOriginal);
+    print("Email: " + MyAppState.emailOriginal);
+    print("Age: " + MyAppState.ageOriginal.toString());
+    print("Psy email: " + MyAppState.psychologistEmailOriginal.toString());
+    print("Password: " + MyAppState.passwordOriginal);
+  }
+
   int _selectedTab = 3;
   List<Widget> _pageOptions = [
     ArticleList(),
     //make chat
-    InfoTab(),
+    ChatScreen(),
     CalendarTab(),
     Registration(),
   ];
@@ -45,15 +59,18 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.blue,
           primaryTextTheme: TextTheme(
             title: TextStyle(color: Colors.white),
           )),
       home: Scaffold(
+        //name of the app at the top
         appBar: AppBar(
           title: Text('VictimsHelp'),
         ),
+        //array for switching between pages
         body: _pageOptions[_selectedTab],
         bottomNavigationBar: BottomNavigationBar(
           unselectedItemColor: Colors.black45,
@@ -61,6 +78,7 @@ class MyAppState extends State<MyApp> {
           currentIndex: _selectedTab,
           onTap: (int index) {
             setState(() {
+              //changing the tab when the user taps on the icons
               _selectedTab = index;
             });
           },
