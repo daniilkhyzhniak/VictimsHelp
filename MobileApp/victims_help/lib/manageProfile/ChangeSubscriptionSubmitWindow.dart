@@ -85,7 +85,7 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
               color: Colors.redAccent,
               onPressed: () {
                 psyEmail = snapshot.data.email;
-                ChangeSubscriptionSubmitWindowSubmit();
+                MakeDeclaration();
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0),
@@ -153,7 +153,8 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
     print(psyEmail);
 
     //String token = await getToken();
-    final response = await http.post(Uri.https('10.0.2.2:44322', 'api/psychologists/declaration/' + psyEmail),
+    final response = await http.post(Uri.https('10.0.2.2:44322', 'api/psychologists/declaration/'
+        + psyEmail),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -162,10 +163,14 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
 
     print("Token: ${MyAppState.token}");
     print(response.statusCode);
+    print(response.body);
 
     if (response.statusCode == 200)
     {
-      ChangeSubscriptionSubmitWindowSubmit();
+      MyAppState.psychologistEmailOriginal = psyEmail.toString();
+      Navigator.pop(context);
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => NewNavBar()));
     }
     //print("DATA: ${data}");
   }
@@ -211,7 +216,7 @@ class ChangeSubscriptionSubmitWindowState extends State<ChangeSubscriptionSubmit
 
     if (response.statusCode == 200)
     {
-      MyAppState.psychologistEmailOriginal = psyEmail;
+      MyAppState.psychologistEmailOriginal = psyEmail.toString();
       Navigator.pop(context);
       Navigator.pop(context);
       Navigator.push(context, MaterialPageRoute(builder: (context) => NewNavBar()));

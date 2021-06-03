@@ -47,16 +47,16 @@ class RegistrationState extends State<Registration> {
             key: _formkey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: [/*
                 Text(
                   "Registration",
                   style: new TextStyle(fontSize: 32)
-                ),
+                ),*/
                 SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                  padding: const EdgeInsets.only(bottom:7,left: 20,right: 20),
                   child: TextFormField(
                     controller: firstName,
                     keyboardType: TextInputType.text,
@@ -74,7 +74,7 @@ class RegistrationState extends State<Registration> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                  padding: const EdgeInsets.only(bottom:7,left: 20,right: 20),
                   child: TextFormField(
                     controller: lastName,
                     keyboardType: TextInputType.text,
@@ -92,7 +92,7 @@ class RegistrationState extends State<Registration> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                  padding: const EdgeInsets.only(bottom: 7,left: 20,right: 20),
                   child: TextFormField(
                     controller: phoneNumber,
                     keyboardType: TextInputType.number,
@@ -110,50 +110,56 @@ class RegistrationState extends State<Registration> {
                     },*/
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
-                  child: TextFormField(
-                    controller: age,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    decoration:buildInputDecoration(Icons.access_time,"Age"),
-                    validator: (String value){
-                      if(value.isEmpty)
-                      {
-                        return 'Please enter your age';
-                      }
-                      if(int.parse(value) < 0)
-                      {
-                        return 'Please enter a valid age';
-                      }
-                      return null;
-                    },/*
+                Row (children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 7,left: 20,right: 10),
+                    child: TextFormField(
+                      controller: age,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      decoration:buildInputDecoration(Icons.access_time,"Age"),
+                      validator: (String value){
+                        if(value.isEmpty)
+                        {
+                          return 'Please enter your age';
+                        }
+                        if(int.parse(value) < 0)
+                        {
+                          return 'Please enter a valid age';
+                        }
+                        return null;
+                      },/*
                     onSaved: (String value){
                       age = int.parse(value);
                     },*/
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
-                  child: SelectFormField(
-                    controller: gender,
-                    type: SelectFormFieldType.dropdown,
-                    items: genders,
-                    decoration:buildInputDecoration(Icons.wc,"Gender"),
-                    validator: (String value){
-                      if (value.isEmpty)
-                      {
-                        return 'Gender is required';
-                      }
-                      return null;
-                    },/*
+                    ),
+                  )),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 7,left: 10,right: 20),
+                      child: SelectFormField(
+                        controller: gender,
+                        type: SelectFormFieldType.dropdown,
+                        items: genders,
+                        decoration:buildInputDecoration(Icons.wc,"Gender"),
+                        validator: (String value){
+                          if (value.isEmpty)
+                          {
+                            return 'Gender is required';
+                          }
+                          return null;
+                        },/*
                     onSaved: (String value){
                       gender.text = value;
                     },*/
+                      ),
+                    )
                   ),
-                ),
+                ],),
+
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                  padding: const EdgeInsets.only(bottom: 7,left: 20,right: 20),
                   child: TextFormField(
                     controller: email,
                     keyboardType: TextInputType.text,
@@ -175,7 +181,7 @@ class RegistrationState extends State<Registration> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                  padding: const EdgeInsets.only(bottom: 7,left: 20,right: 20),
                   child: TextFormField(
                     controller: password,
                     obscureText: true,
@@ -192,7 +198,7 @@ class RegistrationState extends State<Registration> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                  padding: const EdgeInsets.only(bottom: 7,left: 20,right: 20),
                   child: TextFormField(
                     controller: confirmpassword,
                     obscureText: true,
@@ -244,7 +250,7 @@ class RegistrationState extends State<Registration> {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 3,
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
@@ -293,30 +299,27 @@ class RegistrationState extends State<Registration> {
 
     SharedPreferences pref = await SharedPreferences.getInstance();
 
-      var mapeddate = {
-        'firstName': firstName.text,
-        'lastName': lastName.text,
-        'phoneNumber': phoneNumber.text,
-        'age': int.parse(age.text),
-        'gender': gender.text,
-        'email': email.text,
-        'password': password.text,
-        'confirmPassword': confirmpassword.text
-      };
-      print("JSON DATA: ${mapeddate}");
+    //writing in registration info for json
+    var mapeddate = {
+      'firstName': firstName.text,
+      'lastName': lastName.text,
+      'phoneNumber': phoneNumber.text,
+      'age': int.parse(age.text),
+      'gender': gender.text,
+      'email': email.text,
+      'password': password.text,
+      'confirmPassword': confirmpassword.text
+    };
 
-      //mb fix
-      var body = jsonEncode(mapeddate);
+    //encoding into json
+    var body = jsonEncode(mapeddate);
 
-      print("JSON ENCODED DATA: ${body}");
-
-      //String token = await getToken();
+    //Sending registration info
     final response = await http.post(Uri.https('10.0.2.2:44322', '/api/account/register'),
-            headers: {"Content-Type": "application/json-patch+json"},
-            //HttpHeaders.authorizationHeader: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZW1haWxAdGV4dC5jb20iLCJJZCI6IjFiZTMwN2NmLTVmMTktNGE4OS01MWQyLTA4ZDkyMWJjOTc0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNsaWVudCIsIm5iZiI6MTYyMjE5NDg0MiwiZXhwIjoxNjIyNjI2ODQyLCJpc3MiOiJWaWN0aW1zSGVscCJ9.nAjKD3UsMTGc9kpJCwTgB1vsTJHhPzTFND7dHTnF2kM"},
-            body: body);
-        //var data = jsonDecode(response.body);
+        headers: {"Content-Type": "application/json-patch+json"},
+        body: body);
 
+    //getting response
     if (response.statusCode == 200)
     {
       MyAppState.token = response.body;
@@ -326,7 +329,6 @@ class RegistrationState extends State<Registration> {
         print(MyAppState.token);
         print(pref.toString());
         print(response.statusCode);
-        //print("DATA: ${data}");
 
 
 

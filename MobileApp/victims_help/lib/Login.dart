@@ -56,41 +56,39 @@ class LoginState extends State<Login> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
-                  child: TextFormField(
+                  child: TextFormField( //text form for login
                     controller: email,
                     keyboardType: TextInputType.text,
                     decoration:buildInputDecoration(Icons.email,"Email"),
                     validator: (String value){
+                      //checking if the email is empty
                       if(value.isEmpty)
                       {
                         return 'Please enter your email';
                       }
+                      //checking for valid email
                       if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
                         return 'Please enter a valid email';
                       }
                       return null;
-                    },/*
-                    onSaved: (String value){
-                      email.text = value;
-                    },*/
+                    },
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
-                  child: TextFormField(
+                  child: TextFormField( //text form for password
                     controller: password,
                     obscureText: true,
                     keyboardType: TextInputType.text,
                     decoration:buildInputDecoration(Icons.lock,"Password"),
                     validator: (String value){
+                      //checking if the password is empty
                       if(value.isEmpty)
                       {
                         return 'Please enter your password';
-                      }// else if(email.)
+                      }
                       return null;
                     },
-
                   ),
                 ),
                 SizedBox(

@@ -14,6 +14,7 @@ import 'models/user.dart';
 import 'Registration.dart';
 import 'Article_list.dart';
 import 'Info.dart';
+import 'Chat.dart';
 import 'Calendar.dart';
 import 'package:victims_help/Login.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +36,7 @@ class NewNavBarState extends State<NewNavBar> {
   List<Widget> _pageOptions = [
     ArticleList(),
     //make chat
-    InfoTab(),
+    ChatScreen(),
     CalendarTab(),
     AccountInfo(),
   ];
@@ -43,6 +44,7 @@ class NewNavBarState extends State<NewNavBar> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.blue,
           primaryTextTheme: TextTheme(
@@ -115,7 +117,6 @@ class AccountInfoState extends State<AccountInfo> {
                 builder: (context, snapshot)
                 {
                   if (snapshot.hasData) {
-                    //print("OK");
                     MyAppState.firstNameOriginal = snapshot.data.firstName;
                     MyAppState.lastNameOriginal = snapshot.data.lastName;
                     MyAppState.phoneNumberOriginal = snapshot.data.phoneNumber;
@@ -123,7 +124,6 @@ class AccountInfoState extends State<AccountInfo> {
                     MyAppState.emailOriginal = snapshot.data.email;
                     MyAppState.ageOriginal = snapshot.data.age;
                     MyAppState.psychologistEmailOriginal = snapshot.data.psychologistEmail;
-                    //MyAppState.passwordOriginal = snapshot.data.password;
                   }
                   return  SizedBox(
                     height: 30,
@@ -151,7 +151,6 @@ class AccountInfoState extends State<AccountInfo> {
                     } else if (snapshot.hasError) {
                       return Text("${snapshot.error}");
                     }
-
                     // By default, show a loading spinner.
                     return CircularProgressIndicator();
                   },

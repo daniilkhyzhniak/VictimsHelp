@@ -44,12 +44,10 @@ class DeleteAccountState extends State<DeleteAccount> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
-                  alignment: Alignment.center,
-                    child: Text(
+                    Text(
                     "Are you sure you want to delete your account?",
-                    style: TextStyle(fontSize: 32)
-                )
+                    style: TextStyle(fontSize: 32),
+                      textAlign: TextAlign.center,
                 ),
 
                 SizedBox(
