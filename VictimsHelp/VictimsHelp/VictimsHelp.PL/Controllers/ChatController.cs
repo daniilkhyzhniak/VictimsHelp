@@ -40,9 +40,28 @@ namespace VictimsHelp.PL.Controllers
             return View(model);
         }
 
-        [HttpPost("{receiverEmail}")]
-        public async Task<IActionResult> SendMessage(MessageModel model, string receiverEmail)
+        [HttpGet("messages/{receiverEmail}")]
+        public async Task<IActionResult> Messages(string receiverEmail)
         {
+            var currentUserEmail = HttpContext.User.Identity.Name;
+
+            if (currentUserEmail == receiverEmail)
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
+
+            var messages = await _messageService.GetMessagesAsync(currentUserEmail, receiverEmail);
+
+            return View("_MessagesPartial", messages);
+        }
+
+        [HttpPost("{receiverEmail}")]
+        public async Task<IActionResult> SendMessage(CreateMessageViewModel viewModel, string receiverEmail)
+        {
+            var model = new MessageModel
+            {
+                Text = viewModel.Text
+            };
             var currentUserEmail = HttpContext.User.Identity.Name;
             model.SenderEmail = currentUserEmail;
             model.ReceiverEmail = receiverEmail;

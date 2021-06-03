@@ -1,13 +1,13 @@
 ﻿@model VictimsHelp.BLL.Models.MessageModel
 
-@{ 
+@{
     Layout = null;
 }
 
-<form asp-action="SendMessage" method="post">
-    <h2>Message</h2>
-    <div class="form-group">
-        <textarea class="form-control" rows="3" name="Text" asp-for="Text"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Send</button>
+<form asp-action="SendMessage" method="post" class="chat-input">
+    <input class="form-control" type="text" placeholder="Enter Message" name="Text" asp-for="Text" />
+    <button class="send-btn">
+        <img src="~/img/send.png" alt="send-btn" class="send-btn1">
+    </button>
 </form>
+

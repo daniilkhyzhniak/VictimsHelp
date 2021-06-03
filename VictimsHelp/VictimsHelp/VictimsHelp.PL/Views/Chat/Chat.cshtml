@@ -4,40 +4,24 @@
     ViewData["Title"] = "Chat";
 }
 
-<h1>Chat</h1>
-
-<div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Message.SenderName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Message.Text)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Message.DateTime)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Messages)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SenderName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Text)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateTime)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <partial name="_MessageFormPartial" for="Message">
+<div class="container">
+    <div class="container1">
+        <div class="chat-box">
+            <div class="client">
+                <img src="~/img/Psychologist.png" alt="Psychologist" class="Psychologist">
+                <div class="client-info">
+                    <h3 class="Psychologist-text">Psychologist</h3>
+                    <p class="Online">Online</p>
+                </div>
+            </div>
+            <div id="chat">
+                <partial name="_MessagesPartial" for="Messages">
+            </div>
+            <partial name="_MessageFormPartial" for="Message">
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/chat.js"></script>
+}

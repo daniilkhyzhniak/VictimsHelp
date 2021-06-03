@@ -43,9 +43,9 @@ namespace VictimsHelp.PL.Controllers
             model.Emails.Add(HttpContext.User.Identity.Name);
             model.Emails.Add(email);
 
-            var link = await _googleCalendarApiService.OrganizeMeetingAsync(model);
+            await _googleCalendarApiService.OrganizeMeetingAsync(model);
 
-            return View(link);
+            return RedirectToAction("Events");
         }
     }
 }

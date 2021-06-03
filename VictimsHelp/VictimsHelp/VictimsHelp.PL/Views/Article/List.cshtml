@@ -4,44 +4,30 @@
     ViewData["Title"] = "List";
 }
 
-<h1>List</h1>
+<div class="container pt-5">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Text)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    @if (User.IsInRole(Roles.Admin))
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+        
+
+<div class="row ml-4">
+    @{ var random = new Random(); }
+    @foreach (var article in Model)
+    {
+        var i = random.Next(1, 6);
+        <div class="card mr-4 mb-4" style="width: 18rem;">
+            <a asp-action="Details" asp-route-id="@article.Id">
+                <img class="card-img-top" src="~/img/@(i).jpg" alt="Card image cap">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">@article.Title</h5>
+                <p class="card-text">@article.Text.Substring(0, 50) ...</p>
+            </div>
+        </div>
+    }
+</div>
+</div>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using VictimsHelp.BLL.Contracts;
 using VictimsHelp.BLL.Models;
+using VictimsHelp.PL.ViewModels.Chat;
 
 namespace VictimsHelp.PL.Controllers
 {
@@ -35,8 +36,12 @@ namespace VictimsHelp.PL.Controllers
         }
 
         [HttpPost("{receiverEmail}")]
-        public async Task<IActionResult> SendMessage(MessageModel model, string receiverEmail)
+        public async Task<IActionResult> SendMessage(CreateMessageViewModel viewModel, string receiverEmail)
         {
+            var model = new MessageModel
+            {
+                Text = viewModel.Text
+            };
             var currentUserEmail = HttpContext.User.Identity.Name;
             model.SenderEmail = currentUserEmail;
             model.ReceiverEmail = receiverEmail;

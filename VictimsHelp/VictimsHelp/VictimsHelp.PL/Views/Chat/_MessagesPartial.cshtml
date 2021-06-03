@@ -1,0 +1,19 @@
+﻿@model IEnumerable<VictimsHelp.BLL.Models.MessageModel>
+
+@{
+    Layout = null;
+}
+
+<div class="chats">
+    @foreach (var message in Model)
+    {
+        @if (User.Identity.Name == message.SenderEmail)
+        {
+            <div class="my-chat">@message.Text</div>
+        }
+        else
+        {
+            <div class="clinet-chat">@message.Text</div>
+        }
+    }
+</div>

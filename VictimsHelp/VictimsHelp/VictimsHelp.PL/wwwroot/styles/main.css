@@ -1,0 +1,369 @@
+body{
+	
+	/*font-family: 'Montserrat', sans-serif;
+	font-family: 'Open Sans', sans-serif;
+	font-family: 'Ubuntu', sans-serif;*/
+	font-style: 15px;
+	padding: 0;
+	margin: 0;
+	letter-spacing: 0.05em;
+	background: linear-gradient(107.52deg, #F4FBFF 1.31%, #DDF3FF 97.31%);
+}
+
+div, p, input, button, form, span, ul, li{
+	box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5{
+	font-family: 'Ubuntu', sans-serif;
+	margin: 0;
+}
+.container{
+	width: 1170px;
+	margin: 0 auto;
+
+}
+h1{
+	font-size: 30px;
+	margin-top: 60px;
+
+}
+
+
+.logo {
+	margin-right: 152px;
+}
+
+.nav {
+	display: flex;
+}
+
+.menu {
+	display: flex;
+	margin-top: 77px;
+	margin-left: 55px;
+}
+
+.menu li {
+	margin-right: 62px;
+	font-size: 15px;
+	 list-style-type: none;
+}
+
+.menu li a {
+	color: #30556A;
+	text-decoration: none;
+}
+.btn{
+	font-family: 'Montserrat', sans-serif;
+	background: #FFD700;
+	color: #000000;
+	display: block;
+	width: 101px;
+	height: 15px;
+	margin-top: 50px;
+	margin-bottom: 15px;
+	padding: 15px 0;
+	padding-bottom: 30px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.5s ease;
+	border-radius: 25px;
+}
+.btn:hover{
+	background: #fac801;
+}
+.photo{
+	width: 1000px;
+	height: 600px;
+	display: block;
+    margin-left: 280px;
+    margin-right: auto;
+    position: relative;
+}
+h2 {
+	position: absolute;
+	top	: 630px;
+	left: 300px;
+	color: #fff;
+	width: 100%;
+}
+section {
+	display: flex;
+	height: 50px;
+	justify-content: start;
+}
+
+.photo2{
+	width: 900px;
+	height: 550px;
+	display: block;
+	margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+.about-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center
+}
+
+.about {
+	padding-top: 70px;
+}
+
+.about-text {
+	margin: 10px;
+	width: 506px;
+}
+
+.about-text .section-title {
+	width: 330px;
+	margin-bottom: 48px;
+}
+
+.about-text p {
+	margin-bottom: 25px;
+}
+.gallery{
+	margin: 40px;
+}
+.men{
+	font-weight: bold;
+}
+.women{
+	font-weight: bold;
+}
+.children{
+	font-weight: bold;
+}
+.chat{
+	font-weight: bold;
+}
+.us{
+	font-weight: bold;
+
+}
+.download{
+	display: inline-block;
+	
+}
+.learn{
+	
+}
+.Download{	
+	text-align: center;
+	font-size: 30px;
+	display: block;
+	margin-left: 430px;
+}
+.googleplay{
+	margin-left: 550px;
+	width: 438px;
+	height: 129px;
+	display: block;
+}
+.or{
+	margin-left: 750px;
+	font-size: 40px;
+}
+.app{
+	margin-left: 420px;
+	text-align: center;
+	font-size: 30px;
+}
+.Psychological{
+	background: #FFD700;
+	width: 500px;
+	height: 150px;
+	margin-left: 150px;
+	margin-top: 50px;
+	font-weight: lighter;
+	padding: 10px;
+	transition: all 0.5s ease;
+	 border-radius: 25px;
+
+}
+.Psychological-1{
+	background: #A52A2A;
+}
+.aboutus{
+	justify-content: space-between;
+}	
+.textus1{
+	margin-left: 0;
+	margin-right: 150px;
+}
+.Psychological-2{
+	background:#F4A460;
+}
+.Psychological-3{
+	background: #BC8F8F ;
+}
+.violence{
+	background: #FFD700;
+	width: 500px;
+	margin-top: 50px;
+	font-weight: lighter;
+	padding: 10px;
+	transition: all 0.5s ease;
+	 border-radius: 25px;
+}
+.violence-1{
+	height: 350px;
+	background:#F4A460;
+}
+.violence-2{
+	height: 220px;
+	background: #BC8F8F ;
+}
+.about-1{
+	padding-top: 0px;
+}
+.violence-4{
+	height: 185px;
+}
+.violence-5{
+	height: 230px;
+	background:#F4A460;
+}
+.violence-6{
+	height: 180px;
+	background: #BC8F8F ;
+}
+.violence-3{
+	height: 180px;
+	background: #A52A2A;
+}
+.violence-11{
+	height: 130px;
+	background:#F4A460;
+}
+.violence-22{
+	height: 140px;
+	background: #BC8F8F ;
+}
+.container1{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.chat-box{
+	width: 1000px;
+	height: 550px;
+	background-color: #fff;
+	overflow: hidden;
+	margin-top: 40px;
+	border-radius: 20px;
+	position: relative;
+
+}
+.client{
+	padding: 15px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	height: 80px;
+	background-color: #77b3d4;
+}
+.Psychologist{
+	width: 50px;
+	height: 50px;
+	margin-right: 5px;
+}
+.client-info p{
+	color: green;
+	font-weight: bold;
+}
+.chats{
+	width: 100%;
+	padding: 0;
+	color: #fff;
+	position: relative;
+	font-size: 0.9em;
+}
+.clinet-chat{
+	margin: 10px 0px 5px 15px ;
+	width: 60%;
+	word-wrap: break-word;
+	background-color: #A9A9A9;
+	padding: 7px 9px;
+	border-radius: 10px 10px 10px 0px;
+}
+.my-chat{
+	margin: 5px 0px 5px 375px ;
+	width: 60%;
+	word-wrap: break-word;
+	background-color: #87CEFA;
+	padding: 7px 9px;
+	border-radius: 10px 10px 0px 10px;
+}
+.chat-input{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: #fff;
+	position: absolute;
+	left: 30px;
+	bottom: 30px;
+}
+.chat-input input{
+	width: 900px;
+	height: 40px;
+	border-radius: 50px;
+	background-color: #DCDCDC;
+	font-size: 1.2em;
+	padding: 0 15px;
+	border-width: 0px;
+}
+.send-btn{
+	width: 40px;
+	height: 40px;
+	background-color: transparent;
+	overflow: hidden;
+	position: relative;
+	margin-left: 5px;
+	cursor: pointer;
+	transform: 0.4s ease-in-out;
+	border-width: 0px;
+}
+.send-btn:active{
+	transform: scale(0.85);
+}
+.send-btn1{
+	border-color: white;
+	width: 30px;
+	height: 30px;
+}
+.chat-btn{
+	width: 70px;
+	height: 70px;
+	border-radius: 50px;
+	background-color: #fff;
+	cursor: pointer;
+	overflow: hidden;
+	position: fixed;
+	bottom: 120px;
+
+}
+.chat-btn img{
+	width: 90%;
+	height: 90%;
+	border-radius: 50px;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	padding: 5px;
+	transition: 0.5s ease-in-out;
+}
+.chat-btn:hower img{
+	transform: rotate(30deg);
+}
+.Psychologist-text{
+	margin-top: 8px;
+	font-size: 25px;
+}
+.Online{
+	margin-top: 0;
+}

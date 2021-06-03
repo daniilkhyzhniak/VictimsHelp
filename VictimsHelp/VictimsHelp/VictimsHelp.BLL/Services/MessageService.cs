@@ -40,7 +40,7 @@ namespace VictimsHelp.BLL.Services
 
                 return models;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new List<MessageModel>();
             }
