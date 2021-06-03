@@ -22,4 +22,10 @@
     <ProjectReference Include="..\VictimsHelp.BLL\VictimsHelp.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="victims_help.apk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
